@@ -1,14 +1,14 @@
 {
-	"editor.tabSize": 2,
-	"editor.fontSize": 14,
-	"editor.detectIndentation": false,
-	"editor.insertSpaces": false,
-	"explorer.compactFolders": false,
-	"editor.wordWrap": "on",
-	"chat.editor.wordWrap": "on",
-	"editor.codeActionsOnSave": {
-		"source.organizeImports": "explicit",
-		"source.fixAll.eslint": "explicit",
-		"source.fixAll.stylelint": "explicit"
-	}
+  "editor.tabSize": 2,
+  "editor.fontSize": 14,
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": false,
+  "explorer.compactFolders": false,
+  "editor.wordWrap": "on",
+  "chat.editor.wordWrap": "on",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  }
 }
