@@ -58,7 +58,7 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@8.57.0)
       postcss:
-        specifier: ^8
+        specifier: ^8.4.38
         version: 8.4.38
       prettier:
         specifier: ^3.2.5
@@ -67,7 +67,7 @@ importers:
         specifier: ^0.5.14
         version: 0.5.14(prettier@3.2.5)
       tailwindcss:
-        specifier: ^3.4.1
+        specifier: ^3.4.3
         version: 3.4.3
       typescript:
         specifier: ^5
