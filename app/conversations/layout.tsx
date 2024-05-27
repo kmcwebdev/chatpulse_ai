@@ -1,10 +1,8 @@
-import Sidenav from "@/components/Sidenav";
-
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-		<div className="flex flex-row h-screen min-w-fit">
-			<Sidenav />
-			{ children }
+export default function ConversationLayout({ children } : { children: React.ReactNode }) {
+	return(
+		<div className="flex flex-col h-full min-w-fit p-4 space-y-2 bg-inherit border-r-[1px]">
+			<h1 className="text-center text-base h-10">All Conversations</h1>
+			{	children }
 		</div>
-  );
+	)
 }
