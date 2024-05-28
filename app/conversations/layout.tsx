@@ -21,6 +21,10 @@ export default function ConversationLayout({ children } : { children: React.Reac
 		console.log("Selected Tab : ", isSelectedTab);
 	}, [isSelectedTab])
 
+	useEffect(() => {
+		console.log("Selected Conversation : ", isSelectedConversation);
+	}, [isSelectedConversation])
+
 	const handleClick = (id : "New" | "Open" | "Closed") => {
 		setConversations([]);
 		setisSelectedTab(id);
@@ -38,17 +42,18 @@ export default function ConversationLayout({ children } : { children: React.Reac
 
 			{/* Conversations List */}
 			<div className="flex flex-col h-full w-full p-2 no-scrollbar overflow-y-scroll space-y-4">
-
-				{
-					conversations.length === 0 ? (
-						<ConversationItemSkeleton />
-					) : (
-						conversations.map((conversation) => (
-							<ConversationItem key={conversation.id} {...conversation} isActive={(isSelectedConversation == conversation.id)}/>
-						))
-					)
-				}
-			
+				{conversations.length === 0 ? (
+					<ConversationItemSkeleton />
+				) : (
+					conversations.map((conversation) => (
+						<ConversationItem
+							key={conversation.id}
+							{...conversation}
+							isActive={isSelectedConversation == conversation.id}
+							onClick={setIsSelectedConversation}
+						/>
+					))
+				)}
 			</div>
 
 		</div>
