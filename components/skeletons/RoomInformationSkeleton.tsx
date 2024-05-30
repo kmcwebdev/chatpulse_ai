@@ -10,36 +10,38 @@ export default function RoomInformationSkeleton() {
 			<div>
 					<p className="text-sm mb-2">Channel</p>
 					<div className="flex flex-row text-xs font-light text-gray-500">
-						<div className="skeleton w-20 h-4"></div>
+						<div className="skeleton w-20 h-[16px]"></div>
 					</div>
 			</div>
 			<div>
 					<p className="text-sm mb-2">Contact</p>
 					<div className="flex flex-row items-center justify-left space-x-2">
-						<div className="skeleton w-10 h-4"></div>
-						<p className="skeleton w-20 h-4"></p>
+						<div className="skeleton w-10 h-10 mb-1 rounded-md"></div>
+						<p className="skeleton w-20 h-[16px]"></p>
 					</div>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Department</p>
-					<p className="skeleton w-20 h-4"></p>
+					<p className="skeleton w-20 h-[16px]"></p>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Tags</p>
-					<p className="skeleton w-20 h-4"></p>
+					<p className="skeleton w-20 h-[16px]"></p>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Queue Time</p>
-					<p className="skeleton w-20 h-4"></p>
+					<p className="skeleton w-20 h-[16px]"></p>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Created at</p>
-					<p className="skeleton w-20 h-4"></p>
+					<p className="skeleton w-20 h-[16px]"></p>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Average Responce Time</p>
-					<p className="skeleton w-20 h-4"></p>
+					<p className="skeleton w-20 h-[16px]"></p>
 				</div>
+				<button className="btn border-none w-full bg-orange-400 text-white hover:shadow-md transition-shadow" onClick={() => {}}>Edit</button>
+				<button className="btn border-none w-full bg-red-400 text-white hover:shadow-md transition-shadow" onClick={() => {}}>End Chat Session</button>
 		</div>
 	</section>)
 }

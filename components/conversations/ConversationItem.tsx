@@ -1,14 +1,5 @@
+import { ConversationItemProps } from "@/app/lib/actions";
 import Link from "next/link";
-
-export interface ConversationItemProps {
-	id: string;
-	title: string;
-	description: string;
-	timePassed: number;
-	participantCount: number;
-	isActive?: boolean;
-	onClick ?: (e : string) => void;
-}
 
 export default function ConversationItem(props: ConversationItemProps) {
 	return(
