@@ -1,22 +1,9 @@
 import { ChatBubbleLeftIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
 
-interface RoomInformationProps {
-	channel : string;
-	contact: string;
-	department: string;
-	topic: string;
-	priority: string;
-	request: string;
-	tags: string[] | undefined;
-	queueTime: string;
-	createdAt: string;
-	avgResponseTime: string;
-}
+import { IRoomInformation } from "@/app/lib/actions";
 
-export default async function RoomInformation(props: RoomInformationProps) {
-
-	await new Promise(resolve => setTimeout(resolve, 2000));
-
+export default function RoomInformation(props: IRoomInformation) {
+	
 	return(<section className=" col-span-3 hidden lg:block border-l-[1px]">
 		<h1 className="flex flex-row space-x-2 p-4 border-b-[1px]">
 			<InformationCircleIcon className="size-6" />
@@ -28,7 +15,7 @@ export default async function RoomInformation(props: RoomInformationProps) {
 					<p className="text-sm mb-2">Channel</p>
 					<div className="flex flex-row text-xs font-light text-gray-500">
 						<ChatBubbleLeftIcon className="size-5 mr-1"/>
-						<p> Live Chat </p>
+						<p> {props.channel} </p>
 					</div>
 				</div>
 				<div>
