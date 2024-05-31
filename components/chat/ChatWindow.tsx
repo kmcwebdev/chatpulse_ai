@@ -50,11 +50,12 @@ export default function ChatWindow({ messages, isActive } : { messages : IChatMe
 
 		const hours = Math.floor(timeDiff / (1000 * 60 * 60));
 		if (hours < 24) {
+			
 			return `${hours} hours ago`;
 		}
 
 		const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-		
+
 		return `${days} days ago`;
 	}
 }
