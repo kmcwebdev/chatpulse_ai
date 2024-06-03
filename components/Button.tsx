@@ -12,5 +12,3 @@ export default function Button(props: ButtonProps) {
 			{props.children}
 		</Link>)
 }
-
-//btn bg-inherit border-none shadow-none hover:bg-accent hover:shadow-sm text-primary

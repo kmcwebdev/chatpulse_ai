@@ -1,6 +1,7 @@
+import { IRoomInformation } from "@/app/lib/actions";
 import { ChatBubbleLeftIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
 
-import { IRoomInformation } from "@/app/lib/actions";
+//TODO: Implement editing modal for the room information.
 
 export default function RoomInformation(props: IRoomInformation) {
 	
