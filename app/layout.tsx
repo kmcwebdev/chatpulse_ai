@@ -1,4 +1,6 @@
+import ConvexClientProvider from '@/components/convex/convex-client-provider';
 import { cn } from '@/utils/cn';
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -17,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' data-theme='light'>
-      <body className={cn(inter.className, 'antialiased')}>{children}</body>
+      <body className={cn(inter.className, 'antialiased')}>
+        <ClerkProvider>
+          <ConvexClientProvider>{children}</ConvexClientProvider>
+        </ClerkProvider>
+      </body>
     </html>
   );
 }
