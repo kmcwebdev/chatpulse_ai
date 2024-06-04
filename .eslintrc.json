@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "prettier",
-    "next/core-web-vitals",
-    "plugin:@tanstack/eslint-plugin-query/recommended"
-  ],
+  "extends": ["prettier", "next/core-web-vitals"],
   "plugins": ["import", "@typescript-eslint"],
   "rules": {
     "react/display-name": "off",
