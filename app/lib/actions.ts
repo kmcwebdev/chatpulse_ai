@@ -3,6 +3,7 @@
 export interface ConversationItemProps {
 	id: string;
 	title: string;
+	status: string;
 	description: string;
 	timePassed: number;
 	participantCount: number;
@@ -66,7 +67,7 @@ const conversations: IConversation[] = [
 			request: "Request 1",
 			tags: ["Tag 1", "Tag 2"],
 			queueTime: "10 minutes",
-			createdAt: "2022-01-01T10:00:00",
+			createdAt: "2022-01-02T10:00:00",
 			avgResponseTime: "5 minutes"
 		}
 	},
@@ -89,7 +90,7 @@ const conversations: IConversation[] = [
 			request: "Request 2",
 			tags: ["Tag 3", "Tag 4"],
 			queueTime: "20 minutes",
-			createdAt: "2022-01-01T11:00:00",
+			createdAt: "2022-01-03T11:00:00",
 			avgResponseTime: "10 minutes"
 		}
 	},
@@ -111,7 +112,7 @@ const conversations: IConversation[] = [
 			request: "Request 3",
 			tags: ["Tag 5", "Tag 6"],
 			queueTime: "30 minutes",
-			createdAt: "2022-01-01T12:00:00",
+			createdAt: "2022-01-04T12:00:00",
 			avgResponseTime: "15 minutes"
 		}
 	},
@@ -134,7 +135,7 @@ const conversations: IConversation[] = [
 			request: "Request 4",
 			tags: ["Tag 7", "Tag 8"],
 			queueTime: "40 minutes",
-			createdAt: "2022-01-01T13:00:00",
+			createdAt: "2022-01-05T13:00:00",
 			avgResponseTime: "20 minutes"
 		}
 	},
@@ -156,7 +157,7 @@ const conversations: IConversation[] = [
 			request: "Request 5",
 			tags: ["Tag 9", "Tag 10"],
 			queueTime: "50 minutes",
-			createdAt: "2022-01-01T14:00:00",
+			createdAt: "2022-01-06T14:00:00",
 			avgResponseTime: "25 minutes"
 		}
 	},
@@ -178,7 +179,7 @@ const conversations: IConversation[] = [
 			request: "Request 6",
 			tags: ["Tag 11", "Tag 12"],
 			queueTime: "60 minutes",
-			createdAt: "2022-01-01T15:00:00",
+			createdAt: "2022-01-07T15:00:00",
 			avgResponseTime: "30 minutes"
 		}
 	},
@@ -200,7 +201,7 @@ const conversations: IConversation[] = [
 			request: "Request 7",
 			tags: ["Tag 13", "Tag 14"],
 			queueTime: "70 minutes",
-			createdAt: "2022-01-01T16:00:00",
+			createdAt: "2022-01-08T16:00:00",
 			avgResponseTime: "35 minutes"
 		}
 	},
@@ -222,7 +223,7 @@ const conversations: IConversation[] = [
 			request: "Request 8",
 			tags: ["Tag 15", "Tag 16"],
 			queueTime: "80 minutes",
-			createdAt: "2022-01-01T17:00:00",
+			createdAt: "2022-01-09T17:00:00",
 			avgResponseTime: "40 minutes"
 		}
 	},
@@ -244,7 +245,7 @@ const conversations: IConversation[] = [
 			request: "Request 9",
 			tags: ["Tag 17", "Tag 18"],
 			queueTime: "90 minutes",
-			createdAt: "2022-01-01T18:00:00",
+			createdAt: "2022-01-10T18:00:00",
 			avgResponseTime: "45 minutes"
 		}
 	},
@@ -266,7 +267,7 @@ const conversations: IConversation[] = [
 			request: "Request 10",
 			tags: ["Tag 19", "Tag 20"],
 			queueTime: "100 minutes",
-			createdAt: "2022-01-01T19:00:00",
+			createdAt: "2022-01-11T19:00:00",
 			avgResponseTime: "50 minutes"
 		}
 	},
@@ -288,7 +289,7 @@ const conversations: IConversation[] = [
 			request: "Request 11",
 			tags: ["Tag 21", "Tag 22"],
 			queueTime: "110 minutes",
-			createdAt: "2022-01-01T20:00:00",
+			createdAt: "2022-01-12T20:00:00",
 			avgResponseTime: "55 minutes"
 		}
 	},
@@ -310,16 +311,48 @@ const conversations: IConversation[] = [
 			request: "Request 12",
 			tags: ["Tag 23", "Tag 24"],
 			queueTime: "120 minutes",
-			createdAt: "2022-01-01T21:00:00",
+			createdAt: "2022-01-13T21:00:00",
 			avgResponseTime: "60 minutes"
 		}
-	}
+	},
+	{
+		id: "13",
+		title: "Conversation 13",
+		description: "This conversation is Closed",
+		status: "Closed",
+		timePassed: 720,
+		participantCount: 3,
+		messages: [],
+		createdBy: "Mystique Moon",
+		roomInformation: {
+			channel: "Channel 12",
+			contact: "Contact 12",
+			department: "Department 12",
+			topic: "Topic 12",
+			priority: "Priority 12",
+			request: "Request 12",
+			tags: ["Tag 23", "Tag 24"],
+			queueTime: "120 minutes",
+			createdAt: "2022-01-13T21:00:00",
+			avgResponseTime: "60 minutes"
+		}
+	},
 ];
+
+export async function getConversations() : Promise<IConversation[]> {
+	return conversations;
+}
+
+export async function getConversationCount(): Promise<{ new: number, open: number, closed: number }> {
+	const newCount = conversations.filter((conversation) => conversation.status === "New").length;
+	const openCount = conversations.filter((conversation) => conversation.status === "Open").length;
+	const closedCount = conversations.filter((conversation) => conversation.status === "Closed").length;
+	return { new: newCount, open: openCount, closed: closedCount };
+}
 
 export async function getConversationsByStatus(tab: string): Promise<ConversationItemProps[]> {
 	const data = conversations.filter((conversation) => conversation.status === tab);
-	
-	return data.map(({ status, messages, ...rest }) => rest);
+	return data;	
 }
 
 export async function getConversationsById(id: string): Promise<IConversation | null> {

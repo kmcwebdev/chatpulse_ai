@@ -1,8 +1,8 @@
 'use client'
-import { getConversationsByStatus } from "@/app/lib/actions"
+import { getConversationCount, getConversationsByStatus } from "@/app/lib/actions"
+import Sidenav from "@/components/Sidenav"
 import ConversationItem from "@/components/conversations/ConversationItem"
 import ConversationTab from "@/components/conversations/ConversationTab"
-import Sidenav from "@/components/Sidenav"
 import ConversationItemSkeleton from "@/components/skeletons/ConversationItem"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect, useState } from "react"
@@ -20,11 +20,15 @@ export default function ConverationLayout({ children } : { children: React.React
 
 	//Handle Tab Change
 	const { isLoading, data } = useQuery({queryKey: ["conversations", isSelectedTab], queryFn: () =>  getConversationsByStatus(isSelectedTab)});
-
-	useEffect(() => {
-		console.log(data);
-	},[data])
 	
+	useEffect( () => {
+		getConversationCount().then((data) => {
+			setNewConversationCount(data.new);
+			setOpenConversationCount(data.open);
+			setClosedConversationCount(data.closed);
+		})
+	}, [])
+
 	return(<>
 		<Sidenav />
 		<div className="flex flex-col h-full min-w-fit max-w-96 w-96 p-4 space-y-2 bg-inherit border-r-[1px] grow-0">
@@ -42,7 +46,7 @@ export default function ConverationLayout({ children } : { children: React.React
 				{isLoading ? (
 					<ConversationItemSkeleton />
 				) : (
-					data?.map((conversation) => (
+					data?.map((conversation) => ( 
 						<ConversationItem
 							key={conversation.id}
 							{...conversation}

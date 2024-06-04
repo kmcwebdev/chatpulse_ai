@@ -13,7 +13,7 @@ export default function Sidenav() {
 				<Button href="/conversations" className="row-start-2">
 					<ChatBubbleLeftIcon className="size-7"/>
 				</Button>
-				<Button href="#" className="row-start-3">
+				<Button href="/analytics" className="row-start-3">
 					<ChartPieIcon className="size-7" />
 				</Button>
 
