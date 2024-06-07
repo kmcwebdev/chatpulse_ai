@@ -1,9 +1,20 @@
-import { IRoomInformation } from "@/app/lib/actions";
+'use client'
+import { IConversation } from "@/utils/types";
 import { ChatBubbleLeftIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
 
-//TODO: Implement editing modal for the room information.
+interface RoomInformationProps extends IConversation {
+	createdAt: number;
+}
 
-export default function RoomInformation(props: IRoomInformation) {
+export default function RoomInformation(props: RoomInformationProps) {
+	
+	const channel = props.roomInformation.channel;
+	const contact = props.roomInformation.contact;
+	const department = props.roomInformation.department;
+	const tags = props.roomInformation.tags;
+	const queueTime = props.roomInformation.queueTime;
+	const createdAt = new Date(props.createdAt).toLocaleDateString();
+	const avgResponseTime = props.roomInformation.avgResponseTime;
 	
 	return(<section className=" col-span-3 hidden lg:block border-l-[1px]">
 		<h1 className="flex flex-row space-x-2 p-4 border-b-[1px]">
@@ -13,38 +24,44 @@ export default function RoomInformation(props: IRoomInformation) {
 
 		<div className="flex flex-col items-left justify-start grow px-4 py-4 space-y-5">
 				<div>
-					<p className="text-sm mb-2">Channel</p>
+					<p className="text-sm mb-2"> Channel </p>
 					<div className="flex flex-row text-xs font-light text-gray-500">
 						<ChatBubbleLeftIcon className="size-5 mr-1"/>
-						<p> {props.channel} </p>
+						<p> { channel } </p>
 					</div>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Contact</p>
 					<div className="flex flex-row items-center justify-left space-x-2">
-						<div className="flex h-10 w-10 place-content-center items-center rounded-md bg-orange-500 text-xl text-white"> {props.contact[0]} </div>
-						<p className="text-xs font-light"> {props.contact} </p>
+						<div className="flex h-10 w-10 place-content-center items-center rounded-md bg-orange-500 text-xl text-white"> { contact[0] } </div>
+						<p className="text-xs font-light"> { contact } </p>
 					</div>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Department</p>
-					<p className="text-xs font-light text-gray-500">{props.department}</p>
+					<p className="text-xs font-light text-gray-500">{ department }</p>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Tags</p>
-					<p className="text-xs font-light text-gray-500">{props.tags}</p>
+					<p className="text-xs font-light text-gray-500">
+							{
+								Array.isArray(tags) ? tags.map((tag, index) => (
+									<span key={index} className="mr-1 badge badge-secondary text-xs">{tag}</span>
+								)) : null
+							}
+					</p>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Queue Time</p>
-					<p className="text-xs font-light text-gray-500">{props.queueTime}</p>
+					<p className="text-xs font-light text-gray-500">{ queueTime }</p>
 				</div>
 				<div>
 					<p className="text-sm mb-2">Created at</p>
-					<p className="text-xs font-light text-gray-500">{props.createdAt}</p>
+					<p className="text-xs font-light text-gray-500">{ createdAt }</p>
 				</div>
 				<div>
-					<p className="text-sm mb-2">Average Responce Time</p>
-					<p className="text-xs font-light text-gray-500">{props.avgResponseTime}</p>
+					<p className="text-sm mb-2">Average Response Time</p>
+					<p className="text-xs font-light text-gray-500">{ avgResponseTime }</p>
 				</div>
 				<button className="btn border-none w-full bg-orange-400 text-white hover:shadow-md transition-shadow">Edit</button>
 				<button className="btn border-none w-full bg-red-400 text-white hover:shadow-md transition-shadow">End Chat Session</button>
