@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' data-theme='light'>
-      <body className={cn(inter.className, 'antialiased')}>
+      <body className={cn(inter.className, 'antialiased flex h-screen w-screen')}>
         <ClerkProvider>
           <ConvexClientProvider>{children}</ConvexClientProvider>
         </ClerkProvider>

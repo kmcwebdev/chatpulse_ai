@@ -1,12 +1,14 @@
-import { getConversations } from "@/app/lib/actions";
+'use client'
 import Sidenav from "@/components/Sidenav";
 import TagPercentage from "@/components/analytics/piechart";
 import Search from "@/components/analytics/search";
 import Timeline from "@/components/analytics/timeline";
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
 
-export default async function AnalyticsPage() {
+export default function AnalyticsPage() {
 
-	const conversations = await getConversations();
+	const conversations = useQuery(api.conversations.get.all);
 
 	return(<>
 		<Sidenav />
