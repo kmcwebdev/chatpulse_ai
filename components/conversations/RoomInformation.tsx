@@ -45,6 +45,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 				</RoomInformationItem>
 			);
 		}
+
 		return null;
 	};
 
@@ -59,6 +60,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 				}
 			</RoomInformationItem>
 		}
+
 		return null;
 	};
 
@@ -96,19 +98,21 @@ export default function RoomInformation(props: RoomInformationProps) {
 				<RoomInformationItem title="Average Response Time">
 					{roomInformation.avgResponseTime}
 				</RoomInformationItem>
-				<button 
-					className="btn border-none w-full bg-secondary text-white hover:shadow-md transition-shadow"
-					onClick={() => setIsModalOpen(true)}
+				<div className="grid grid-cols-1 gap-2 xl:grid-cols-2">
+					<button 
+						className="btn border-none w-full bg-secondary text-white hover:shadow-md transition-shadow"
+						onClick={() => setIsModalOpen(true)}
+						>
+						Edit
+					</button>
+					<button
+						disabled={status == CONVERSATIONSTATUS.CLOSED}
+						className={`btn border-none w-full bg-error text-white hover:shadow-md transition-shadow`}
+						onClick={() => closeChat({ id })}
 					>
-					Edit
-				</button>
-				<button
-					disabled={status == CONVERSATIONSTATUS.CLOSED}
-					className={`btn border-none w-full bg-error text-white hover:shadow-md transition-shadow`}
-					onClick={() => closeChat({ id })}
-				>
-					End Chat Session
-				</button>
+						End Chat Session
+					</button>
+				</div>
 			</div>
 
 			{
@@ -176,7 +180,6 @@ function Input( props : {
 			placeholder={ props.placeholder || "Type here"}
 			className={`input input-bordered w-full max-w-full ${props.className}`}
 			value={props.value}
-			// onChange={(e) => setRoomInformation({ ...roomInformation, topic: e.target.value })}
 			onChange={(e) => props.onChange(e)}
 		/>
 	</label>)
