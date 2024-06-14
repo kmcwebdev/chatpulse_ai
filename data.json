@@ -1,5 +1,6 @@
 [
 	{
+		"email":"example@example.com",
 		"createdBy": "Alice Smith",
 		"joinedServiceMembers": [],
 		"status": "New",
@@ -13,7 +14,6 @@
 		"roomInformation": {
 			"avgResponseTime": "4 minutes",
 			"channel": "Email",
-			"contact": "Support",
 			"department": "IT",
 			"queueTime": "15 minutes",
 			"priority": "Cancelled",
@@ -23,6 +23,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Bob Johnson",
 		"joinedServiceMembers": [],
 		"status": "Open",
@@ -36,7 +37,6 @@
 		"roomInformation": {
 			"avgResponseTime": "10 minutes",
 			"channel": "Phone",
-			"contact": "Admin",
 			"department": "Operations",
 			"queueTime": "20 minutes",
 			"priority": "Incident",
@@ -46,6 +46,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Charlie Brown",
 		"joinedServiceMembers": [],
 		"status": "New",
@@ -59,7 +60,6 @@
 		"roomInformation": {
 			"avgResponseTime": "7 minutes",
 			"channel": "Chat",
-			"contact": "Tech Support",
 			"department": "IT",
 			"queueTime": "12 minutes",
 			"priority": "Cancelled",
@@ -69,6 +69,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "David Lee",
 		"joinedServiceMembers": [],
 		"status": "Open",
@@ -82,7 +83,6 @@
 		"roomInformation": {
 			"avgResponseTime": "6 minutes",
 			"channel": "Email",
-			"contact": "Backup Service",
 			"department": "IT",
 			"queueTime": "10 minutes",
 			"priority": "Incident",
@@ -92,6 +92,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Eve Williams",
 		"joinedServiceMembers": [],
 		"status": "Closed",
@@ -105,7 +106,6 @@
 		"roomInformation": {
 			"avgResponseTime": "8 minutes",
 			"channel": "Chat",
-			"contact": "Network Admin",
 			"department": "IT",
 			"queueTime": "18 minutes",
 			"priority": "Request",
@@ -115,6 +115,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Frank Harris",
 		"joinedServiceMembers": [],
 		"status": "New",
@@ -128,7 +129,6 @@
 		"roomInformation": {
 			"avgResponseTime": "5 minutes",
 			"channel": "Email",
-			"contact": "Support",
 			"department": "IT",
 			"queueTime": "15 minutes",
 			"priority": "Cancelled",
@@ -138,6 +138,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Grace Kim",
 		"joinedServiceMembers": [],
 		"status": "Closed",
@@ -151,7 +152,6 @@
 		"roomInformation": {
 			"avgResponseTime": "12 minutes",
 			"channel": "Phone",
-			"contact": "Tech Support",
 			"department": "IT",
 			"queueTime": "25 minutes",
 			"priority": "Request",
@@ -161,6 +161,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Henry Liu",
 		"joinedServiceMembers": [],
 		"status" : "New",
@@ -174,7 +175,6 @@
 		"roomInformation": {
 			"avgResponseTime": "6 minutes",
 			"channel": "Chat",
-			"contact": "Software Team",
 			"department": "IT",
 			"queueTime": "14 minutes",
 			"priority": "Cancelled",
@@ -184,6 +184,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Isla Martinez",
 		"joinedServiceMembers": [],
 		"status" : "Open",
@@ -197,7 +198,6 @@
 		"roomInformation": {
 			"avgResponseTime": "11 minutes",
 			"channel": "Email",
-			"contact": "Admin",
 			"department": "IT",
 			"queueTime": "22 minutes",
 			"priority": "Incident",
@@ -207,6 +207,7 @@
 		}
 	},
 	{
+		"email":"example@example.com",
 		"createdBy": "Jackie Chan",
 		"joinedServiceMembers": [],
 		"status" : "New",
@@ -220,7 +221,6 @@
 		"roomInformation": {
 			"avgResponseTime": "7 minutes",
 			"channel": "Phone",
-			"contact": "Support",
 			"department": "IT",
 			"queueTime": "13 minutes",
 			"priority": "Cancelled",
