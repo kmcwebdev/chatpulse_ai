@@ -17,6 +17,9 @@ export default function Tagger(props: {
 
 	useEffect(() => {
 		const similar = items?.filter((value: string) => {
+			if(value == undefined || value == null) 
+				return;
+
 			return value.toLowerCase().includes(searchValue.toLowerCase());
 		}).sort();
 		setSimilarItems(similar);
@@ -38,14 +41,37 @@ export default function Tagger(props: {
 			}
 		};
 		window.addEventListener('click', handleClickOutside);
+
 		return () => {
 			window.removeEventListener('click', handleClickOutside);
 		};
-	}, []);
+	});
 
-	const handleSubmit = () => {
-		// TODO: Implement submit logic
-	};
+	useEffect(() => {
+	  const handleKeyPress = (e: any) => {
+			if (e.key === "Enter" && isSelected && similarItems && similarItems.length > 0) {
+				handleResultItemClick(similarItems[0]);
+			}
+	  };
+	  window.addEventListener('keydown', handleKeyPress);
+
+	  return () => {
+		window.removeEventListener('keydown', handleKeyPress);
+	  };
+	}, [isSelected, similarItems]);
+
+	useEffect(() => {
+		const handleBackspace = (e: any) => {
+			if (e.key === "Backspace" && e.target.value === "" && selectedItems && selectedItems.length > 0) {
+				handleSelectedItemClick(selectedItems[selectedItems.length - 1])
+			}
+		};
+		window.addEventListener("keydown", handleBackspace);
+
+		return () => {
+			window.removeEventListener("keydown", handleBackspace);
+		};
+	}, [isSelected, selectedItems]);
 
 	const handleResultItemClick = (value: string) => {
 		setSelectedItems([...selectedItems, value]);
@@ -63,16 +89,16 @@ export default function Tagger(props: {
 			<label className="label">
 				<span className="label-text">{props.title}</span>
 			</label>
-			<div className="flex flex-wrap input input-bordered items-center justify-start w-full max-w-full min-h-12 h-fit gap-x-1 p-1 overflow-hidden">
+			<div className="flex flex-wrap input input-bordered items-center justify-start w-full max-w-full min-h-12 h-fit gap-1 p-1 overflow-hidden">
 				{selectedItems?.map((value: string, index: number) => (
 					<TaggerItem key={index} title={value} onClick={() => handleSelectedItemClick(value)} />
 				))}
-				<input type="text" value={searchValue} className="min-w-[2px] w-full px-2" onChange={(e) => setSearchValue(e.target.value)} onClick={() => setIsSelected(true)} />
+				<input type="text" value={searchValue} className="min-w-fit max-w-fit w-[5px] px-2" onChange={(e) => setSearchValue(e.target.value)} onClick={() => setIsSelected(true)} />
 			</div>
 			<TaggerResult className={isSelected ? "inline-block" : "hidden"}>
 				{similarItems?.map((value: string, index: number) => (
 					<TaggerResultItem key={index} title={value} onClick={() => handleResultItemClick(value)} />
-				))}
+				)) ?? null}
 			</TaggerResult>
 		</div>
 	);

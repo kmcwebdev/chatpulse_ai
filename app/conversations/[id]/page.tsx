@@ -6,20 +6,12 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import { notFound } from "next/navigation";
 
 export default function Page({ params }: { params: { id: string } }) {
-	let conversation;
+	const conversation = useQuery(api.conversations.get.byId, {
+		id: params.id as Id<"conversations">,
+	});
 	const { user } = useUser();
-
-	try {
-		conversation = useQuery(api.conversations.get.byId, {
-			id: params.id as Id<"conversations">,
-		});
-	} catch (e) {
-		console.log(e);
-		notFound();
-	}
 
 	return (
 		<div className="grid grid-rows-12 h-screen w-full">
