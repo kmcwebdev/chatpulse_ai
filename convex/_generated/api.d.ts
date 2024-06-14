@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as conversations_get from "../conversations/get.js";
 import type * as conversations_put from "../conversations/put.js";
+import type * as tags_get from "../tags/get.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -28,6 +29,7 @@ import type * as conversations_put from "../conversations/put.js";
 declare const fullApi: ApiFromModules<{
   "conversations/get": typeof conversations_get;
   "conversations/put": typeof conversations_put;
+  "tags/get": typeof tags_get;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

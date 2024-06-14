@@ -1,6 +1,8 @@
-import { CONVERSATIONSTATUS, DEFAULTROOM } from "@/utils/types";
+'use server'
+import { CONVERSATIONSTATUS, DEFAULTROOM, PRIORITY } from "@/utils/types";
 import { v } from "convex/values";
 import { mutation } from "../_generated/server";
+
 export const message = mutation({
 	args: {
 		id: v.id("conversations"),
@@ -28,6 +30,60 @@ export const newMessage = mutation({
 			messages: [],
 			roomInformation: DEFAULTROOM,
 			status: CONVERSATIONSTATUS.NEW
+		})
+	}
+})
+
+export const newServiceMemeber = mutation({
+	args: {
+		id: v.id("conversations"),
+		serviceMember: v.string(),
+	},
+	handler: async (ctx, args) => {
+		const oldData = await ctx.db.get(args.id);
+		return await ctx.db.patch(args.id, {
+			joinedServiceMembers: [...(oldData?.joinedServiceMembers ?? []), args.serviceMember],
+			status : CONVERSATIONSTATUS.OPEN,
+		})
+	}
+})
+
+
+//Keep this updated with IRoomInformation
+export const closeChat = mutation({
+	args: {
+		id: v.id("conversations")
+	},
+	handler: async (ctx, args) => {
+		return await ctx.db.patch(args.id, {
+			status: CONVERSATIONSTATUS.CLOSED,
+		})
+	}
+})
+
+export const roomInformation = mutation({
+	args: {
+		id : v.id("conversations"),
+		roomInformation: v.object({
+			avgResponseTime : v.string(),
+			channel : v.string(),
+			topic : v.string(),
+			department: v.string(),
+			priority : v.union(
+				v.literal(PRIORITY.CANCELLED),
+				v.literal(PRIORITY.INCIDENT),
+				v.literal(PRIORITY.NONE),
+				v.literal(PRIORITY.REQUEST)
+			),
+			queueTime : v.string(),
+			request : v.string(),
+			tags : v.array(v.string())
+		})
+	},
+	handler: async (ctx, args) => {
+		const oldData = await ctx.db.get(args.id);
+		return await ctx.db.patch(args.id, {
+			roomInformation: args.roomInformation,
 		})
 	}
 })
