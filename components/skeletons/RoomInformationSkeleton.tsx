@@ -40,8 +40,8 @@ export default function RoomInformationSkeleton() {
 					<p className="text-sm mb-2">Average Responce Time</p>
 					<p className="skeleton w-20 h-[16px]"></p>
 				</div>
-				<button className="btn border-none w-full bg-orange-400 text-white hover:shadow-md transition-shadow" onClick={() => {}}>Edit</button>
-				<button className="btn border-none w-full bg-red-400 text-white hover:shadow-md transition-shadow" onClick={() => {}}>End Chat Session</button>
+				{/* <button className="btn border-none w-full bg-orange-400 text-white hover:shadow-md transition-shadow" onClick={() => {}}>Edit</button>
+				<button className="btn border-none w-full bg-red-400 text-white hover:shadow-md transition-shadow" onClick={() => {}}>End Chat Session</button> */}
 		</div>
 	</section>)
 }
