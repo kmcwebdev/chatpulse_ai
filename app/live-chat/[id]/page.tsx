@@ -5,27 +5,21 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { IConversation } from "@/utils/types";
 import { useMutation, useQuery } from "convex/react";
-import { notFound, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LiveChatPage({
 	params
 } : {
 	params : { id: string }
 }) {
-	let conversation;
+	let conversation = useQuery(api.conversations.get.byId, { 
+		id: params.id as Id<"conversations">
+	});
+
 	const router = useRouter();	
 	const createConversation = useMutation(api.conversations.put.newMessage); //TODO: WE can change the api name to something else less ambiguous
 	const endConversation = useMutation(api.conversations.put.closeChat);
 	const name = useSearchParams().get("name");
-
-	try {
-		conversation = useQuery(api.conversations.get.byId, { 
-			id: params.id as Id<"conversations">
-		})	
-	} catch (e) {
-		console.log(e);
-		notFound();
-	}
 
 	const handleNewChat = async () => {
 		if (!conversation) return;

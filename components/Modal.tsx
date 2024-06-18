@@ -24,10 +24,11 @@ export default function RoomInformationEditMenu(props : ModalProps ) {
 	
 	useEffect(() => {
 		window.addEventListener("keydown", handleKeydownEvent);
+
 		return () => {
 			window.removeEventListener("keydown", handleKeydownEvent);
 		}
-	}, [])
+	})
 
 	//Sync state with parent state.
 	useEffect(() => {
