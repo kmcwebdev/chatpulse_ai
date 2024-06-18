@@ -6,7 +6,7 @@ export default defineSchema({
   conversations: defineTable({
     createdBy: v.string(),
 		email: v.string(),
-    joinedServiceMembers: v.array(v.any()),
+    joinedServiceMembers: v.array(v.string()),
     messages: v.array(
       v.object({
         message: v.string(),
@@ -17,7 +17,6 @@ export default defineSchema({
     roomInformation: v.object({
       avgResponseTime: v.string(),
       channel: v.string(),
-      contact: v.string(),
       department: v.string(),
 			topic: v.string(),
       priority: v.union(
@@ -35,5 +34,9 @@ export default defineSchema({
       v.literal(CONVERSATIONSTATUS.OPEN),
       v.literal(CONVERSATIONSTATUS.CLOSED),
     ),
+		rating : v.optional(v.number()),
   }),
+	tags: defineTable({
+		tags: v.array(v.string()),
+	})
 });

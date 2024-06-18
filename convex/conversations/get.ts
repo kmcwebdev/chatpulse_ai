@@ -3,9 +3,10 @@ import { v } from "convex/values";
 
 export const all = query({
 	args: {
+		limit : v.optional(v.number())
 	},
 	handler: async (ctx, args) => {
-		return await ctx.db.query("conversations").collect()
+		return await ctx.db.query("conversations").order("desc").take(args.limit || 10)
 	}
 })
 	
