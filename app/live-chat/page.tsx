@@ -28,13 +28,13 @@ export default function LiveChat() {
 			<form onSubmit={handleSubmit} className="flex flex-col space-y-4 min-w-96">
 				<div className="flex flex-col space-y-1">
 					<label htmlFor="Email" className="">Email</label>
-					<input id="Email" type="email" className="input input-bordered" placeholder="Email address (Required)" value={email} onChange={(e) => setEmail(e.target.value)} />
+					<input id="Email" type="email" className="input input-bordered" placeholder="Email address (Required)" value={email} onChange={(e) => setEmail(e.target.value)} required={true}/>
 				</div>
 				<div className="flex flex-col space-y-1">
 					<label htmlFor="Name" className="">Name</label>
-					<input id="Name" className="input input-bordered" placeholder="Name (Required)" value={name} onChange={(e) => setName(e.target.value)} />
+					<input id="Name" className="input input-bordered" placeholder="Name (Required)" value={name} onChange={(e) => setName(e.target.value)} required={true}/>
 				</div>
-				<button type="submit" className="btn btn-primary">Submit</button>
+				<button type="submit" className="btn btn-accent">Submit</button>
 			</form>
 		</div>
 	)
