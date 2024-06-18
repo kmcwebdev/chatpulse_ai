@@ -6,6 +6,7 @@ import { useQuery } from 'convex/react';
 import Link from 'next/link';
 import React from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+
 export default function AnalyticsSummaryPage() {
 
 	const chats = useQuery(api.conversations.get.all, { limit : 100 })
