@@ -90,7 +90,7 @@ export default function AnalyticsSummaryPage() {
 					</Card>
 					<Card className="col-span-5 overflow-auto" title="Recent Chats">
 						{
-							chats?.slice(0,7).map((chat, index) => {
+							chats ? chats?.slice(0,7).map((chat, index) => {
 								return(
 									<Link key={index} href={`/conversations/${chat._id}`} className="hover:underline">
 										<div className="flex items-center justify-between">
@@ -100,7 +100,7 @@ export default function AnalyticsSummaryPage() {
 										<small className="text-gray-500 font-light">{trunc(chat.messages[chat.messages.length - 1]?.message, 20) || "No Activity"}</small>
 									</Link>
 								)
-							})
+							}) : <RecentChatsSkeleton />
 						}
 					</Card>
 				</div>
