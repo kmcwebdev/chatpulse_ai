@@ -38,7 +38,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 		if (createdBy) {
 			return (
 				<RoomInformationItem title="Contact">
-					<div className="flex h-10 w-10 place-content-center items-center rounded-md bg-secondary text-xl text-white">
+					<div className="flex h-10 w-10 place-content-center items-center rounded-md bg-accent text-xl text-white">
 						{createdBy[0]}
 					</div>
 					<p className="text-xs font-light">{createdBy}</p>
