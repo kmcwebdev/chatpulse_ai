@@ -8,6 +8,8 @@ export default function AnalyticsPage({ children } : {
 
 	return(<>
 		<Sidenav />
-		{ children }
+		<div className="bg-slate-100 grow max-h-screen max-w-full h-screen w-full">
+			{ children }
+		</div>
 	</>)
 }

@@ -26,7 +26,9 @@ export default function SideNavItem(props: {
 		<div className="flex flex-col min-h-fit w-full">
 			<div
 				className={`flex items-center justify-between min-h-fit px-2 rounded-md py-3 font-semibold text-gray-500 text-xs   ${
-					props.href && pathName.includes(props.href) ? "text-slate-950 bg-accent" : hoverable ?  "hover:bg-gray-100 hover:text-slate-950 hover:cursor-pointer" : "bg-white"
+					props.href && pathName.includes(props.href) ? "text-slate-950 bg-accent" : hoverable ?  "hover:bg-gray-100 hover:text-slate-950 hover:cursor-pointer" : "bg-white"	
+				} ${
+					props.href && pathName.includes(props.href) && props.children ? "bg-gray-100" : ""
 				}
 				`}
 				onClick={handleClick}
@@ -36,7 +38,7 @@ export default function SideNavItem(props: {
 				</div>
 				{props.children && <ChevronDownIcon className={`size-3 transition-all ${isOpen ? "rotate-180" : "rotate-0"}`} />}
 			</div>
-			{isOpen && props.children ? (<div className="ml-2">{props.children}</div>) : null}
+				{isOpen && props.children ? (<div className="ml-2 mt-1 space-y-1">{props.children}</div>) : null}
 		</div>
 	);
 }
