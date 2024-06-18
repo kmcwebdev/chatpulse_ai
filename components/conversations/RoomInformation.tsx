@@ -16,7 +16,7 @@ interface RoomInformationProps extends IConversation {
 }
 
 export default function RoomInformation(props: RoomInformationProps) {
-	const { joinedServiceMembers, id, createdAt } = props;
+	const { createdBy, id, createdAt } = props;
 	const closeChat = useMutation(api.conversations.put.closeChat);
 	const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
 
@@ -34,14 +34,14 @@ export default function RoomInformation(props: RoomInformationProps) {
 		})
 	}
 
-	const renderJoinedServiceMember = () => {
-		if (joinedServiceMembers[0]) {
+	const renderContact = () => {
+		if (createdBy) {
 			return (
 				<RoomInformationItem title="Contact">
 					<div className="flex h-10 w-10 place-content-center items-center rounded-md bg-secondary text-xl text-white">
-						{joinedServiceMembers[0][0]}
+						{createdBy[0]}
 					</div>
-					<p className="text-xs font-light">{joinedServiceMembers[0]}</p>
+					<p className="text-xs font-light">{createdBy}</p>
 				</RoomInformationItem>
 			);
 		}
@@ -65,18 +65,18 @@ export default function RoomInformation(props: RoomInformationProps) {
 	};
 
 	return (
-		<section className="col-span-3 hidden lg:block border-l-[1px] overflow-scroll">
+		<section className="col-span-3 hidden lg:block border-l-[1px] overflow-auto">
 			<h1 className="flex flex-row space-x-2 p-4 border-b-[1px]">
 				<InformationCircleIcon className="size-6" />
 				<span> Room Information </span>
 			</h1>
 
-			<div className="flex flex-col items-left justify-start grow p-4 space-y-5">
+			<div id="body" className="flex flex-col items-left justify-start grow p-4 space-y-5">
 				<RoomInformationItem title="Channel">
 					<ChatBubbleLeftIcon className="size-7" />
 					<p>{roomInformation.channel}</p>
 				</RoomInformationItem>
-				{renderJoinedServiceMember()}
+				{renderContact()}
 				<RoomInformationItem title="Department">
 					{roomInformation.department}
 				</RoomInformationItem>
@@ -110,7 +110,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 						className={`btn border-none w-full bg-error text-white hover:shadow-md transition-shadow`}
 						onClick={() => closeChat({ id })}
 					>
-						End Chat Session
+						End Chat
 					</button>
 				</div>
 			</div>
