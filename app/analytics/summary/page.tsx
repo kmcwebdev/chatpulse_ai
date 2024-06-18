@@ -88,9 +88,9 @@ export default function AnalyticsSummaryPage() {
 							</PieChart>
 						</ResponsiveContainer>
 					</Card>
-					<Card className="col-span-5" title="Recent Chats">
+					<Card className="col-span-5 overflow-auto" title="Recent Chats">
 						{
-							chats?.slice(0,4).map((chat, index) => {
+							chats?.slice(0,7).map((chat, index) => {
 								return(
 									<Link key={index} href={`/conversations/${chat._id}`} className="hover:underline">
 										<div className="flex items-center justify-between">
