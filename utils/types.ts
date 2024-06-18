@@ -14,13 +14,12 @@ export enum PRIORITY {
 export const DEFAULTROOM : IRoomInformation = Object.freeze({
 	avgResponseTime: "10 minutes",
 	channel: "Live Chat",
-	contact: "",
 	topic: "",
 	department: "Service Desk",
 	priority: PRIORITY.NONE,
 	queueTime: "2 hours",
 	request: "",
-	tags: [""],
+	tags: [],
 })
 
 export interface ConversationItemProps extends IConversation{
@@ -32,7 +31,7 @@ export interface ConversationItemProps extends IConversation{
 
 export interface IConversation { //_id and _creatingTime can be taken from the database, we don't need to input those.
 	createdBy: string;
-	joinedServiceMembers: string | string[] | ""
+	joinedServiceMembers: string[]
 	messages: IChatMessage[];
 	roomInformation: IRoomInformation;
 	status: CONVERSATIONSTATUS;
@@ -41,7 +40,6 @@ export interface IConversation { //_id and _creatingTime can be taken from the d
 export interface IRoomInformation {
 	avgResponseTime: string;
 	channel: string;
-	contact: string;
 	topic: string;
 	department: string;
 	priority: PRIORITY;
