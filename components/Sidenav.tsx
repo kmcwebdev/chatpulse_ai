@@ -23,9 +23,6 @@ export default function Sidenav() {
 				}
 				href="/conversations"
 			>
-				<SideNavItem title="New" />
-				<SideNavItem title="Open" />
-				<SideNavItem title="Closed" />
 			</SideNavItem>
 			<SideNavItem title={<span className="text-xs font-semibold">ANALYTICS</span>} hoverable={false}/>
 			<SideNavItem
@@ -35,7 +32,7 @@ export default function Sidenav() {
 						<span className="text-xs font-semibold">Summary</span>
 					</>
 				}
-				href="/analytics"
+				href="/analytics/summary"
 			/>
 			<SideNavItem
 				title={
@@ -44,6 +41,7 @@ export default function Sidenav() {
 						<span className="text-xs font-semibold">Chat</span>
 					</>
 				}
+				href="/analytics/chat"
 			>
 				<SideNavItem
 						title={
@@ -51,6 +49,7 @@ export default function Sidenav() {
 								<span className="text-xs font-semibold">Total Chats</span>
 							</>
 						}
+						href='/analytics/chat/total'
 					/>
 				<SideNavItem
 						title={
@@ -58,6 +57,7 @@ export default function Sidenav() {
 								<span className="text-xs font-semibold">Feedback</span>
 							</>
 						}
+						href="/analytics/chat/feedback"
 					/>
 				<SideNavItem
 						title={
@@ -65,6 +65,7 @@ export default function Sidenav() {
 								<span className="text-xs font-semibold">Tags</span>
 							</>
 						}
+						href="/analytics/chat/tags"
 					/>
 			</SideNavItem>
 			<SideNavItem
