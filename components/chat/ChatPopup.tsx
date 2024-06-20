@@ -20,12 +20,14 @@ export default function ChatPopup(props : {
 				}
 		};
 		window.addEventListener('click', handleClickOutside);
+
 		return () => {
 				window.removeEventListener('click', handleClickOutside);
 		};
 }, []);
 
-	return(<div className="absolute bottom-5 right-5" ref={chatPopupRef}>
+	return(
+	<div className="absolute bottom-5 right-5" ref={chatPopupRef}>
 		<div className={`relative flex items-center justify-center h-fit w-fit aspect-square rounded-full bg-accent shadow-2xl p-4`}
 		onClick={() => setIsOpen(true)}
 		>

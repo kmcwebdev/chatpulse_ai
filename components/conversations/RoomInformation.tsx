@@ -16,10 +16,6 @@ interface RoomInformationProps extends IConversation {
 	createdAt: number;
 }
 
-interface ITicketInformation {
-
-}
-
 export default function RoomInformation(props: RoomInformationProps) {
 	const { createdBy, id, createdAt } = props;
 	const closeChat = useMutation(api.conversations.put.closeChat);
