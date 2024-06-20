@@ -1,5 +1,6 @@
 'use client'
 
+import Input from "@/components/Input";
 import Modal from "@/components/Modal";
 import Tagger from "@/components/Tagger";
 import RoomInformationItem from "@/components/conversations/RoomInformationItem";
@@ -15,11 +16,15 @@ interface RoomInformationProps extends IConversation {
 	createdAt: number;
 }
 
+interface ITicketInformation {
+
+}
+
 export default function RoomInformation(props: RoomInformationProps) {
 	const { createdBy, id, createdAt } = props;
 	const closeChat = useMutation(api.conversations.put.closeChat);
-	const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
-
+	const [ isEditModalOpen, setIsEditModalOpen ] = useState(false);
+	const [ isTicketModalOpen, setIsTicketModalOpen ] = useState(false);
 	const [ roomInformation, setRoomInformation ] = useState<IRoomInformation>(props.roomInformation);
 	const [ status, setStatus ] = useState<CONVERSATIONSTATUS>(props.status);	
 
@@ -27,7 +32,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 	const editRoomInformation = useMutation(api.conversations.put.roomInformation);
 
 	const handleSubmit = () => {
-		setIsModalOpen(false);
+		setIsEditModalOpen(false);
 		editRoomInformation({
 			roomInformation: roomInformation,
 			id: props.id
@@ -98,16 +103,24 @@ export default function RoomInformation(props: RoomInformationProps) {
 				<RoomInformationItem title="Average Response Time">
 					{roomInformation.avgResponseTime}
 				</RoomInformationItem>
-				<div className="grid grid-cols-1 gap-2 xl:grid-cols-2">
-					<button 
-						className="btn border-none w-full bg-secondary text-white hover:shadow-md transition-shadow"
-						onClick={() => setIsModalOpen(true)}
-						>
-						Edit
-					</button>
+				<div className="grid grid-rows-2 gap-2 text-black">
+					<div className="grid grid-cols-2 gap-2">
+						<button 
+							className="btn border-none w-full bg-accent hover:shadow-md transition-shadow"
+							onClick={() => setIsEditModalOpen(true)}
+							>
+							Edit
+						</button>
+						<button 
+							className="btn border-none w-full bg-success hover:shadow-md transition-shadow"
+							onClick={() => setIsTicketModalOpen(true)}
+							>
+							Create ticket
+						</button>
+					</div>
 					<button
 						disabled={status == CONVERSATIONSTATUS.CLOSED}
-						className={`btn border-none w-full bg-error text-white hover:shadow-md transition-shadow`}
+						className={`btn border-none w-full bg-error hover:shadow-md transition-shadow`}
 						onClick={() => closeChat({ id })}
 					>
 						End Chat
@@ -116,12 +129,12 @@ export default function RoomInformation(props: RoomInformationProps) {
 			</div>
 
 			{
-				isModalOpen ? 
+				isEditModalOpen ? 
 				<Modal 
 				id="Edit Room Information"
-				isOpen={isModalOpen} 
+				isOpen={isEditModalOpen} 
 				title="Edit Room Information"
-				onClose={() => setIsModalOpen(false)}
+				onClose={() => setIsEditModalOpen(false)}
 				>
 				<Input
 					title="Topic"
@@ -156,41 +169,86 @@ export default function RoomInformation(props: RoomInformationProps) {
 				selectedItems={roomInformation.tags}/>
 
 				<button 
-					className="btn border-none my-2 w-full bg-secondary text-white hover:shadow-md transition-shadow"
+					className="btn border-none my-2 w-full bg-accent text-white hover:shadow-md transition-shadow"
 					onClick={handleSubmit}
 				> Save </button>
 			</Modal> : <></>
 			}
-					</section>
-	);
-}
 
-function Input( props : {
-	title : string;
-	value : string;
-	type ?: string;
-	placeholder ?: string;
-	className ?: string;
-	onChange : (e: any) => void;
-}) {
-	return(<label className="form-control w-full max-w-full">
-		<label className='label label-text'> { props.title } </label>
-		<input
-			type={ props.type || "text" }
-			placeholder={ props.placeholder || "Type here"}
-			className={`input input-bordered w-full max-w-full ${props.className}`}
-			value={props.value}
-			onChange={(e) => props.onChange(e)}
-		/>
-	</label>)
+			{
+				isTicketModalOpen ? 
+				<Modal
+				id="Create Ticket"
+				isOpen={isTicketModalOpen}
+				title="Create Ticket"
+				onClose={() => setIsTicketModalOpen(false)}
+				>
+				<Input 
+					title="Full Name"
+					value="Full Name"
+					type="text"
+					placeholder="Full Name"
+					onChange={(e) =>{}} />
+				<Input 
+					title="Organization"
+					value="Organization"
+					type="text"
+					placeholder="Organization"
+					onChange={(e) =>{}} />
+				<Input 
+					title="Email"
+					value="Email"
+					type="text"
+					placeholder="Full Name"
+					onChange={(e) =>{}} />
+				<div className="flex space-x-4">
+					<Dropdown 
+						title="Category"
+						value="Category"
+						onChange={(e) =>{}}>
+					</Dropdown>
+					<Dropdown 
+						title="Sub-Category"
+						value="Category"
+						onChange={(e) =>{}}>
+					</Dropdown>
+				</div>
+				<div className="flex space-x-4">
+					<Dropdown 
+							title="Priority"
+							value="Priority"
+							onChange={(e) =>{}}>
+					</Dropdown>
+					<Dropdown 
+							title="Technician Group"
+							value="Category"
+							onChange={(e) =>{}}>
+					</Dropdown>
+				</div>
+				<div className="flex space-x-4">
+					<Dropdown 
+							title="Site"
+							value="Site"
+							onChange={(e) =>{}}>
+					</Dropdown>
+					<Dropdown 
+							title="Assigned To"
+							value="Assigned To"
+							onChange={(e) =>{}}>
+					</Dropdown>
+				</div>
+				</Modal> : null
+			}
+		</section>
+	);
 }
 
 function Dropdown(props: {
 	title: string;
 	value: string;
-	onChange: (e : any) => void;
-	children ?: React.ReactNode;
-	className ?: string;
+	onChange: (e: any) => void;
+	children?: React.ReactNode;
+	className?: string;
 }) {
 	return (
 		<label className="form-control w-full max-w-full mt-2">

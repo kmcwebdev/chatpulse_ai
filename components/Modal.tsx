@@ -11,7 +11,7 @@ interface ModalProps {
 	className ?: string;
 }
 
-export default function RoomInformationEditMenu(props : ModalProps ) {
+export default function Modal(props : ModalProps ) {
 	const [ isOpen, setIsOpen ] = useState<boolean>(props.isOpen);
 	
 	const handleClose = () => {
