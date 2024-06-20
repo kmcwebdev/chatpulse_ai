@@ -183,54 +183,54 @@ export default function RoomInformation(props: RoomInformationProps) {
 					title="Full Name"
 					value="Full Name"
 					type="text"
-					placeholder="Full Name"
-					onChange={(e) =>{}} />
+					placeholder="Full Name" 
+				/>
 				<Input 
 					title="Organization"
 					value="Organization"
 					type="text"
 					placeholder="Organization"
-					onChange={(e) =>{}} />
+				 />
 				<Input 
 					title="Email"
 					value="Email"
 					type="text"
 					placeholder="Full Name"
-					onChange={(e) =>{}} />
+				/>
 				<div className="flex space-x-4">
 					<Dropdown 
 						title="Category"
 						value="Category"
-						onChange={(e) =>{}}>
+						onChange={(e) =>{return e}}>
 					</Dropdown>
 					<Dropdown 
 						title="Sub-Category"
 						value="Category"
-						onChange={(e) =>{}}>
+						onChange={(e) =>{return e}}>
 					</Dropdown>
 				</div>
 				<div className="flex space-x-4">
 					<Dropdown 
 							title="Priority"
 							value="Priority"
-							onChange={(e) =>{}}>
+							onChange={(e) =>{return e}}>
 					</Dropdown>
 					<Dropdown 
 							title="Technician Group"
 							value="Category"
-							onChange={(e) =>{}}>
+							onChange={(e) =>{return e}}>
 					</Dropdown>
 				</div>
 				<div className="flex space-x-4">
 					<Dropdown 
 							title="Site"
 							value="Site"
-							onChange={(e) =>{}}>
+							onChange={(e) =>{return e}}>
 					</Dropdown>
 					<Dropdown 
 							title="Assigned To"
 							value="Assigned To"
-							onChange={(e) =>{}}>
+							onChange={(e) =>{return e}}>
 					</Dropdown>
 				</div>
 				</Modal> : null
