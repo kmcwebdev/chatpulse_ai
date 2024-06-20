@@ -24,3 +24,9 @@ export function trunc(str : string, maxLength : number) : string {
 	if (str?.length>maxLength) return str.substring(0, maxLength) + " ...";  
 	return str;  
 }  
+
+export function generateColor(): string {
+	const number = Math.floor(Math.random() * 16777215);
+	const hexColor = number.toString(16);
+	return `#${hexColor}`;
+}

@@ -99,7 +99,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 				<RoomInformationItem title="Average Response Time">
 					{roomInformation.avgResponseTime}
 				</RoomInformationItem>
-				<div className="grid grid-rows-2 gap-2 text-black">
+				<div className="grid grid-rows-2 gap-2 text-white">
 					<div className="grid grid-cols-2 gap-2">
 						<button 
 							className="btn border-none w-full bg-accent hover:shadow-md transition-shadow"
