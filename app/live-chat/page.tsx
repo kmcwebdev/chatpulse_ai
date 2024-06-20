@@ -4,11 +4,13 @@ import { api } from "@/convex/_generated/api";
 import { useMutation } from "convex/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function LiveChat() {
 	const [ email, setEmail ] = useState<string>("");
 	const [ name, setName ] = useState<string>("");
+	const	[ submitElement, setSubmitElement] = useState<string | React.ReactNode>("Submit");
+
 	const router = useRouter();
 
 	const createConversation = useMutation(api.conversations.put.newMessage);
@@ -16,6 +18,7 @@ export default function LiveChat() {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		setSubmitElement(<span className="loading loading-spinner loading-xs"></span>)
 		const conversationId = await createConversation({
 			createdBy: name,
 			email,
@@ -33,7 +36,9 @@ export default function LiveChat() {
 				</div>
 				<Input title="Name" type="text" placeholder="Username" value={name} onChange={(e) => setName(e.target.value)} required={true} />
 				<Input title="Email" type="email" placeholder="*******" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
-				<button className="btn btn-accent w-full" >Submit</button>
+				<button className="btn btn-accent w-full" >
+					{ submitElement }
+				</button>
 			</form>
 		</div>
 	)
