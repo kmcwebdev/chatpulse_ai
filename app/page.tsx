@@ -1,8 +1,11 @@
-export default function Home() {
+import { redirect } from "next/navigation";
 
-  return (
-    <div className='flex w-screen h-screen items-center justify-center'> 
-      <button className='btn btn-success text-white'>Submit</button>
-    </div>
-  );
+export default function Home() {
+	redirect("/sign-in");
+
+	return(
+		<div className="flex item-center justify-center">
+			Something went wrong...
+		</div>
+	)
 }

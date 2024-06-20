@@ -37,7 +37,7 @@ export default function ChatWindow(props : ChatWindowProps) {
 	let InputComponent; 
 	if (props.status == CONVERSATIONSTATUS.CLOSED) { //If the conversation is closed
 		InputComponent = <input
-		className="w-full px-3 py-2 border-none focus:outline-none placeholder-error bg-transparent"
+		className="w-full h-full px-3 py-2 focus:outline-none placeholder-error bg-transparent"
 		placeholder="Chat is closed"
 		disabled/>
 	} else if(props.user == props.createdBy || props.joinedServiceMembers.includes(props.user)) { //If the user joined the chat previously
@@ -63,12 +63,12 @@ export default function ChatWindow(props : ChatWindowProps) {
 		</form>
 	} else {
 		InputComponent = <form onSubmit={handleJoinChat} className="w-full flex items-center justify-center">
-			<button className="btn btn-accent text-white" type="submit"> Join Chat </button>
+			<button className="btn btn-success text-white" type="submit"> Join Chat </button>
 		</form>
 	}
 
 	return (
-		<section className={`grid grid-rows-12 col-span-8 lg:col-span-5 h-full overflow-y-scroll no-scrollbar ${props.className}`}>
+		<section className={`grid grid-rows-12 col-span-8 lg:col-span-5 h-full overflow-y-scroll no-scrollbar bg-slate-100 ${props.className}`}>
 			<div className="row-span-11 overflow-y-scroll no-scrollbar px-4 py-2" ref={chatWindowRef}>
 				{props.messages?.map((chat) => (
 					<ChatBubble
@@ -80,9 +80,10 @@ export default function ChatWindow(props : ChatWindowProps) {
 					/>
 				))}
 			</div>
-			<div className="flex items-center justify-center row-span-1 border-t-[1px]">
+			<div className="flex items-center justify-center row-span-1 border-t-[1px] grow bg-white">
 
 			{/* Add an if else here to display button to join chat */}
+
 			{ InputComponent }
 			</div>
 		</section>

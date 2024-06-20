@@ -1,6 +1,8 @@
 'use client'
+import Input from "@/components/Input";
 import { api } from "@/convex/_generated/api";
 import { useMutation } from "convex/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -18,23 +20,20 @@ export default function LiveChat() {
 			createdBy: name,
 			email,
 		})
-		
-		router.push(`/live-chat/${conversationId}?name=${name}`);
+
+		router.push(`/live-chat/${conversationId}`);
 	}
 
 	return (
-		<div className="flex grow items-center justify-center">
-			{/* Registration Form */}
-			<form onSubmit={handleSubmit} className="flex flex-col space-y-4 min-w-96">
-				<div className="flex flex-col space-y-1">
-					<label htmlFor="Email" className="">Email</label>
-					<input id="Email" type="email" className="input input-bordered" placeholder="Email address (Required)" value={email} onChange={(e) => setEmail(e.target.value)} required={true}/>
+		<div className="w-full h-full flex items-center justify-center flex-col" >
+			<form className="w-full px-2 max-w-96 space-y-4" onSubmit={handleSubmit}>
+				<div className="flex items-center justify-center flex-col space-y-4 my-4 ">
+					<Image src="/kmc-logo-large.png" alt="KMC Logo" height={100} width={160} />
+					<p className="text-xs text-center">Welcome back, it's good to see you again</p>
 				</div>
-				<div className="flex flex-col space-y-1">
-					<label htmlFor="Name" className="">Name</label>
-					<input id="Name" className="input input-bordered" placeholder="Name (Required)" value={name} onChange={(e) => setName(e.target.value)} required={true}/>
-				</div>
-				<button type="submit" className="btn btn-accent">Submit</button>
+				<Input title="Name" type="text" placeholder="Username" value={name} onChange={(e) => setName(e.target.value)} required={true} />
+				<Input title="Email" type="email" placeholder="*******" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
+				<button className="btn btn-accent w-full" >Submit</button>
 			</form>
 		</div>
 	)
