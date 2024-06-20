@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export default function ConversationLayout({ children }: { children: React.ReactNode }) {
 	const [openConversationCount, setOpenConversationCount] = useState<number>(0);
 	const [closedConversationCount, setClosedConversationCount] = useState<number>(0);
-	const [selectedTab, setSelectedTab] = useState<CONVERSATIONSTATUS>(CONVERSATIONSTATUS.NEW);
+	const [selectedTab, setSelectedTab] = useState<CONVERSATIONSTATUS>(CONVERSATIONSTATUS.OPEN);
 	const [selectedConversation, setSelectedConversation] = useState<string>("");
 
 	const conversations = useQuery(api.conversations.get.all, {});
