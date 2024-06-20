@@ -9,7 +9,6 @@ import { useQuery } from "convex/react";
 import { useEffect, useState } from "react";
 
 export default function ConversationLayout({ children }: { children: React.ReactNode }) {
-	const [newConversationCount, setNewConversationCount] = useState<number>(0);
 	const [openConversationCount, setOpenConversationCount] = useState<number>(0);
 	const [closedConversationCount, setClosedConversationCount] = useState<number>(0);
 	const [selectedTab, setSelectedTab] = useState<CONVERSATIONSTATUS>(CONVERSATIONSTATUS.NEW);
@@ -18,7 +17,6 @@ export default function ConversationLayout({ children }: { children: React.React
 	const conversations = useQuery(api.conversations.get.all, {});
 
 	useEffect(() => {
-		let newCount = 0;
 		let openCount = 0;
 		let closedCount = 0;
 
@@ -26,9 +24,6 @@ export default function ConversationLayout({ children }: { children: React.React
 
 		conversations.forEach((conversation) => {
 			switch (conversation.status) {
-				case CONVERSATIONSTATUS.NEW:
-					newCount++;
-					break;
 				case CONVERSATIONSTATUS.OPEN:
 					openCount++;
 					break;
@@ -38,7 +33,6 @@ export default function ConversationLayout({ children }: { children: React.React
 			}
 		});
 
-		setNewConversationCount(newCount);
 		setOpenConversationCount(openCount);
 		setClosedConversationCount(closedCount);
 	}, [conversations]);
@@ -50,16 +44,10 @@ export default function ConversationLayout({ children }: { children: React.React
 	return (
 		<>
 			<Sidenav />
-			<div className="flex flex-col h-full min-w-96 max-w-96 w-96 p-4 space-y-2 bg-inherit border-r-[1px] grow-0">
+			<div className="flex flex-col h-full w-80 min-w-80 max-w-80 p-4 space-y-2 bg-inherit border-r-[1px] grow-0">
 				<h1 className="text-center text-base h-10">All Conversations</h1>
 				{/* Conversation Tabs */}
 				<div role="tablist" className="flex flex-row w-full min-h-fit tabs tabs-bordered items-center justify-evenly">
-					<ConversationTab
-						title="New"
-						count={newConversationCount}
-						isSelected={selectedTab === CONVERSATIONSTATUS.NEW}
-						onClick={() => setSelectedTab(CONVERSATIONSTATUS.NEW)}
-					/>
 					<ConversationTab
 						title="Open"
 						count={openConversationCount}
