@@ -1,4 +1,5 @@
 "use client"
+
 import Card from "@/components/Card";
 import { api } from "@/convex/_generated/api";
 import { trunc } from "@/utils/utils";
@@ -12,7 +13,7 @@ export default function AnalyticsSummaryPage() {
 	const chatDays : { [key : string] : number} = {};
 	const chats = useQuery(api.conversations.get.all, { limit: 1000 });
 	const colors = ["#f0a154", "#e08d43", "#c97432", "#a95c21", "#874310", "#662100"];
-
+      
 	chats?.forEach((item) => {
 		item.roomInformation.tags.forEach((tag) => {
 			tags[tag] = (tags[tag] || 0) + 1;
@@ -23,7 +24,9 @@ export default function AnalyticsSummaryPage() {
 		const day = date.getDate().toString().padStart(2, '0');
 		const month = (date.getMonth() + 1).toString().padStart(2, '0');
 		const year = date.getFullYear().toString();
-		const dateString = day + month + year;
+
+    const dateString = day + month + year;
+
 		chatDays[dateString] = (chatDays[dateString] || 0) + 1;
 	});
 
@@ -34,7 +37,7 @@ export default function AnalyticsSummaryPage() {
 	const totalTop5 = sortedTags.slice(0, 5).reduce((sum, item) => sum + item.count, 0);
 
 	const pieData = sortedTags.slice(0, 5).map((item, index) => ({
-		tag: item.tag,
+		name: item.tag,
 		count: item.count,
 		percentage: Math.round((item.count / totalTags) * 100),
 		fill: colors[index],
@@ -43,18 +46,18 @@ export default function AnalyticsSummaryPage() {
 	const othersData = {
 		tag: "Others",
 		chats: totalTags - totalTop5,
+
 		percentage: Math.round(((totalTags - totalTop5) / totalTags) * 100),
 		fill: colors[colors.length - 1],
 	};
 
-	const updatedPieData = [...pieData, othersData];
-
 	const data = Object.entries(chatDays).map(([date, chats]) => ({
-		date: date.slice(0, 2) + '-' + date.slice(2, 4) + '-' + date.slice(4),
+		date,
 		chats,
 	}));
-
 	
+	const updatedPieData = [...pieData, othersData]
+
 	return(
 		<div className="grid grid-rows-12 w-full min-h-fit h-full overflow-scroll no-scrollbar">
 			<Card className="row-span-6" title="Total Chats">
