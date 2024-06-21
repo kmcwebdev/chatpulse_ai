@@ -9,6 +9,7 @@ export default function Tagger(props: {
 	onChange?: (e: string[]) => void;
 }) {
 	const taggerRef = useRef<HTMLDivElement>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 	const [isSelected, setIsSelected] = useState(false);
 	const [items, setItems] = useState<string[]>(props.items ?? []);
 	const [searchValue, setSearchValue] = useState("");
@@ -27,25 +28,32 @@ export default function Tagger(props: {
 
 	useEffect(() => {
 		if (props.onChange) props.onChange(selectedItems);
-	}, [selectedItems]);
+	}, [selectedItems, props]);
 
 	useEffect(() => {
 		const filteredItems = items.filter(item => !selectedItems.includes(item));
 		setItems(filteredItems);
-	}, [selectedItems]);
+	}, [selectedItems, items]);
 
 	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (taggerRef.current && !taggerRef.current.contains(event.target as Node)) {
-				setIsSelected(false);
+		const handleClickInside = (event: MouseEvent) => {
+			if(taggerRef.current && taggerRef.current.contains(event.target as Node)) {
+				setIsSelected(true);
+				inputRef.current?.focus();
 			}
+		}
+
+		const handleClickOutside = (event: MouseEvent) => {
+			if (taggerRef.current && !taggerRef.current.contains(event.target as Node)) setIsSelected(false);
 		};
 		window.addEventListener('click', handleClickOutside);
+		window.addEventListener('click', handleClickInside);
 
 		return () => {
 			window.removeEventListener('click', handleClickOutside);
+			window.removeEventListener('click', handleClickInside);
 		};
-	});
+	}, [isSelected]);
 
 	useEffect(() => {
 	  const handleKeyPress = (e: any) => {
@@ -73,6 +81,8 @@ export default function Tagger(props: {
 		};
 	}, [isSelected, selectedItems]);
 
+
+
 	const handleResultItemClick = (value: string) => {
 		setSelectedItems([...selectedItems, value]);
 		setItems(items.filter(item => item !== value));
@@ -85,15 +95,15 @@ export default function Tagger(props: {
 	};
 
 	return (
-		<div ref={taggerRef} className={`relative w-full`} >
+		<div  className={`relative w-full`} >
 			<label className="label">
 				<span className="label-text">{props.title}</span>
 			</label>
-			<div className="flex flex-wrap input input-bordered items-center justify-start w-full max-w-full min-h-12 h-fit gap-1 p-1 overflow-hidden">
+			<div ref={taggerRef} className="flex flex-wrap input input-bordered items-center justify-start w-full max-w-full min-h-12 h-fit gap-1 p-1 overflow-hidden">
 				{selectedItems?.map((value: string, index: number) => (
 					<TaggerItem key={index} title={value} onClick={() => handleSelectedItemClick(value)} />
 				))}
-				<input type="text" value={searchValue} className="min-w-fit max-w-fit w-[5px] px-2" onChange={(e) => setSearchValue(e.target.value)} onClick={() => setIsSelected(true)} />
+				<input ref={inputRef} type="text" value={searchValue} className="min-w-fit max-w-fit w-[5px] px-2" onChange={(e) => setSearchValue(e.target.value)} onClick={() => setIsSelected(true)} />
 			</div>
 			<TaggerResult className={isSelected ? "inline-block" : "hidden"}>
 				{similarItems?.map((value: string, index: number) => (

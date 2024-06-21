@@ -33,7 +33,7 @@ export default function ChatPopup(props : {
 		>
 	 		<ChatBubbleLeftRightIcon className="size-8 text-white" />
 		</div>
-		<div className={`absolute bottom-7 right-7 overflow-hidden rounded-lg border-black border-2  ${isOpen ? "h-fit" : "h-0 border-0"}`} style={{zIndex: 9999}}>
+		<div className={`absolute bottom-7 right-7 overflow-hidden rounded-lg border-black border-2  ${isOpen ? "h-fit" : "h-0 border-none"}`} style={{zIndex: 9999}}>
 			<iframe 
 				id="chatPopup"
 				title="Support Popup"

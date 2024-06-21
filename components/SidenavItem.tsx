@@ -11,7 +11,7 @@ export default function SideNavItem(props: {
 	href ?: string;
 	hoverable ?: boolean;
 }) {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(usePathname().includes(props.href ? props.href : ""));
 	const pathName = usePathname();
 	const router = useRouter();
 
@@ -25,16 +25,16 @@ export default function SideNavItem(props: {
 	return (
 		<div className="flex flex-col min-h-fit w-full">
 			<div
-				className={`flex items-center justify-between min-h-fit px-2 rounded-md py-3 font-semibold text-gray-500 text-xs   ${
+				className={`flex items-center justify-between transition-all min-h-fit px-2 rounded-md py-3 font-semibold text-gray-500 text-xs   ${
 					props.href && pathName.includes(props.href) ? "text-slate-950 bg-accent" : hoverable ?  "hover:bg-gray-100 hover:text-slate-950 hover:cursor-pointer" : "bg-white"	
 				} ${
 					props.href && pathName.includes(props.href) && props.children ? "bg-gray-100" : ""
 				}
-				`}
+				${props.className}`}
 				onClick={handleClick}
 			>
 				<div className="flex w-full items-center justify-between">
-					<div className="flex space-x-2 items-center">{props.title}</div>
+					<div className="flex space-x-2 items-center w-full">{props.title}</div>
 				</div>
 				{props.children && <ChevronDownIcon className={`size-3 transition-all ${isOpen ? "rotate-180" : "rotate-0"}`} />}
 			</div>
