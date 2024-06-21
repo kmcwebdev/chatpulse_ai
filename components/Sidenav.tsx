@@ -10,7 +10,7 @@ export default function Sidenav() {
 	const user = useUser().user;
 
 	return (
-		<nav className="flex flex-col border-r-[1px] px-3 py-2 min-w-60 items-start justify-start space-y-1">
+		<nav className="flex flex-col border-r-[1px] px-3 py-2 min-w-60 max-h-screen items-start justify-start space-y-1">
 			<Link href="/" className="flex items-center justify-center py-4">
 				<Image priority={true} src="/kmc-logo-large.png" alt="Company Logo" height={100} width={160} className="w-28" />
 			</Link>

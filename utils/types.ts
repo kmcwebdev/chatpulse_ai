@@ -1,3 +1,5 @@
+import { Id } from "@/convex/_generated/dataModel";
+
 export enum CONVERSATIONSTATUS {
 	NEW = "New",
 	OPEN = "Open",
@@ -52,4 +54,16 @@ export interface IChatMessage {
 	sender: string;
 	message: string;
 	timestamp: string;
+}
+
+export interface QueryReturn {
+	_id: Id<"conversations">;
+	_creationTime: number;
+	rating?: number | undefined;
+	createdBy: string;
+	email: string;
+	joinedServiceMembers: string[];
+	messages: IChatMessage[];
+	status: CONVERSATIONSTATUS;
+	roomInformation : IRoomInformation;
 }

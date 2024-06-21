@@ -12,9 +12,10 @@ export const all = query({
 	
 export const byId = query({
 	args: {
-		id: v.id("conversations")
+		id: v.union(v.id("conversations"), v.null())
 	},
 	handler: async (ctx, args) => {
+		if(args.id == null) return [];
 		return await ctx.db.get(args.id);
 	}
 })
