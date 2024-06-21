@@ -50,7 +50,7 @@ export default function AnalyticsSummaryPage() {
 
 	const totalTop5 = sortedTags.slice(0, 5).reduce((sum, item) => sum + item.count, 0);
 
-	const pieData = sortedTags.slice(0, 5).map((item, index) => ({
+	const pieData = sortedTags.slice(0, 5).map((item) => ({
 		tag: item.tag,
 		count: item.count,
 		percentage: Math.round((item.count / totalTags) * 100),
@@ -105,46 +105,7 @@ export default function AnalyticsSummaryPage() {
 						</PieChart>
 					</ResponsiveContainer>
 				</Card>
-				{/* <Card className="col-span-1 lg:col-span-5 overflow-scroll no-scrollbar" title="Recent Chats">
-					{chats ? (
-						chats.slice(0, 7).map((chat, index) => (
-							<SideNavItem
-								key={index}
-								title={
-									<>
-										<div className="flex flex-col h-full w-full">
-											<div className="flex w-full justify-between">
-												<h1 className="font-bold text-black">{chat.createdBy}</h1>
-												<span>{calculateTimePassed(chat._creationTime.toString())}</span>
-											</div>
-											<div className="flex w-full justify-between">
-												<span>{trunc(chat.messages && chat.messages.length > 0 ? chat.messages[chat.messages.length - 1].message : 'No Activity', 20)}</span>
-											</div>
-										</div>
-									</>
-								}
-								href={`/conversations/${chat.status.toLowerCase()}/${chat._id}`}
-								className=""
-							/>
-						))
-					) : (
-						<RecentChatsSkeleton />
-					)}
-				</Card> */}
-
 			</div>
-		</div>
-	);
-}
-
-function RecentChatsSkeleton() {
-	return (
-		<div className="row-span-1">
-			<div className="grid grid-cols-12">
-				<div className="skeleton col-span-6 h-4"></div>
-				<div className="skeleton col-start-10 col-span-3 h-4"></div>
-			</div>
-			<div className="skeleton h-4 mt-2"></div>
 		</div>
 	);
 }

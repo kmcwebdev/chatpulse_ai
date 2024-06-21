@@ -21,7 +21,7 @@ export default function AnalyticsTagsPage() {
 		.sort((a, b) => b[1] - a[1])
 		.map(([tag, count]) => ({ tag, count }));
 
-	const pieData = sortedTags.map((tag, index) => ({
+	const pieData = sortedTags.map((tag) => ({
 		tag: tag.tag,
 		name: trunc(tag.tag,2),
 		count: tag.count,
