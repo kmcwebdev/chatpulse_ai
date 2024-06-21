@@ -10,10 +10,14 @@ export default function LiveChatPage({
 } : {
 	params : { id: string }
 }) {
-	let conversation = useQuery(api.conversations.get.byId, { 
+	let chat = useQuery(api.conversations.get.byId, { 
 		id: params.id as Id<"conversations">
 	});
 
+	if(Array.isArray(chat)) return <div className="flex h-full w-full items-center justify-center">
+		<span>Select a conversation to view</span>
+	</div>
+	
 	return (
 		<div className="grid grid-rows-12 h-full w-full">
 			<nav className="flex row-span-1 items-center justify-start px-4 py-2 bg-neutral space-x-4">
@@ -24,11 +28,11 @@ export default function LiveChatPage({
 						src="/kmc-logo.webp"
 						sizes="100vw" />
 				</div>
-				<h1 className="text-white font-semibold text-xl">{conversation?.joinedServiceMembers[0]}</h1>
+				<h1 className="text-white font-semibold text-xl">{chat?.joinedServiceMembers[0]}</h1>
 			</nav>
 			<div className="row-span-11">
 				{
-					conversation ? <ChatWindow id={conversation._id} user={conversation.createdBy} {...conversation} /> : null
+					chat ? <ChatWindow id={chat._id} user={chat.createdBy} {...chat} /> : null
 				}
 			</div>
 		</div>
