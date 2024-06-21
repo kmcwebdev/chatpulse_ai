@@ -28,12 +28,12 @@ export default function Tagger(props: {
 
 	useEffect(() => {
 		if (props.onChange) props.onChange(selectedItems);
-	}, [selectedItems]);
+	}, [selectedItems, props]);
 
 	useEffect(() => {
 		const filteredItems = items.filter(item => !selectedItems.includes(item));
 		setItems(filteredItems);
-	}, [selectedItems]);
+	}, [selectedItems, items]);
 
 	useEffect(() => {
 		const handleClickInside = (event: MouseEvent) => {

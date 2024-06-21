@@ -68,7 +68,7 @@ export default function ChatWindow(props : ChatWindowProps) {
 	}
 
 	return (
-		<section className={`grid grid-rows-12 col-span-8 lg:col-span-5 h-full overflow-y-scroll no-scrollbar bg-slate-100 ${props.className}`}>
+		<section className={`grid grid-rows-12 h-full overflow-y-scroll no-scrollbar bg-slate-100 ${props.className}`}>
 			<div className="row-span-11 overflow-y-scroll no-scrollbar px-4 py-2" ref={chatWindowRef}>
 				{props.messages?.map((chat) => (
 					<ChatBubble
