@@ -1,7 +1,11 @@
+import { redirect } from "next/navigation";
+
 export default function Page() {
-	return (
-		<div className="flex grow justify-center items-center">
-			Select a conversation to view
+	redirect("/conversations/open")
+
+	return(
+		<div className="flex items-center justify-center grow">
+			Something went wrong.
 		</div>
-	);
+	)
 }

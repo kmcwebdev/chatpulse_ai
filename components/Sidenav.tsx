@@ -1,7 +1,7 @@
 'use client'
 import SideNavItem from "@/components/SidenavItem";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { ChatBubbleLeftRightIcon, ClipboardDocumentIcon, FolderArrowDownIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleLeftRightIcon, ClipboardDocumentIcon, DocumentMagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ export default function Sidenav() {
 	const user = useUser().user;
 
 	return (
-		<nav className="flex flex-col border-r-[1px] px-3 py-2 min-w-60 items-start justify-start space-y-1">
+		<nav className="flex flex-col border-r-[1px] px-3 py-2 min-w-60 max-h-screen items-start justify-start space-y-1">
 			<Link href="/" className="flex items-center justify-center py-4">
 				<Image priority={true} src="/kmc-logo-large.png" alt="Company Logo" height={100} width={160} className="w-28" />
 			</Link>
@@ -23,6 +23,8 @@ export default function Sidenav() {
 				}
 				href="/conversations"
 			>
+			<SideNavItem title="Open" href="/conversations/open"/>
+			<SideNavItem title="Closed" href="/conversations/closed"/>
 			</SideNavItem>
 			<SideNavItem title={<span className="text-xs font-semibold">ANALYTICS</span>} hoverable={false}/>
 			<SideNavItem
@@ -46,14 +48,6 @@ export default function Sidenav() {
 				<SideNavItem
 						title={
 							<>
-								<span className="text-xs font-semibold">Total Chats</span>
-							</>
-						}
-						href='/analytics/chat/total'
-					/>
-				<SideNavItem
-						title={
-							<>
 								<span className="text-xs font-semibold">Feedback</span>
 							</>
 						}
@@ -71,8 +65,8 @@ export default function Sidenav() {
 			<SideNavItem
 				title={
 					<>
-						<FolderArrowDownIcon className="size-5" />
-						<span className="text-xs font-semibold">Export Data</span>
+						<DocumentMagnifyingGlassIcon className="size-5" />
+						<span className="text-xs font-semibold">Search</span>
 					</>
 				}
 			/>
