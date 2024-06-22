@@ -28,12 +28,12 @@ export default function Tagger(props: {
 
 	useEffect(() => {
 		if (props.onChange) props.onChange(selectedItems);
-	}, [selectedItems, props]);
+	}, [selectedItems]);
 
 	useEffect(() => {
 		const filteredItems = items.filter(item => !selectedItems.includes(item));
 		setItems(filteredItems);
-	}, [selectedItems, items]);
+	}, [selectedItems]);
 
 	useEffect(() => {
 		const handleClickInside = (event: MouseEvent) => {
@@ -80,8 +80,6 @@ export default function Tagger(props: {
 			window.removeEventListener("keydown", handleBackspace);
 		};
 	}, [isSelected, selectedItems]);
-
-
 
 	const handleResultItemClick = (value: string) => {
 		setSelectedItems([...selectedItems, value]);
