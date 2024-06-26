@@ -42,7 +42,7 @@ export default function Page() {
 			<div className="row-span-10 overflow-auto no-scrollbar">
 				{
 					chats ? chats?.map((chat) => { //TODO : Add proper chat searching
-						if(chat.status.toLowerCase() == status.toLowerCase() && chat.createdBy.includes(searchValue)) return <Item
+						if(chat.status.toLowerCase() == status.toLowerCase() && chat.createdBy.toLowerCase().includes(searchValue.toLowerCase())) return <Item
 							onClick={() => handleChatSelect(chat._id)}
 							id={chat._id}
 							status={chat.status}
