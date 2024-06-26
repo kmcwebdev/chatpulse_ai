@@ -17,6 +17,7 @@ export default function Page() {
 	const searchParams = useSearchParams();
 	const { replace } = useRouter();
 	const [ selectedChatId, setSelectedChatId ] = useState<Id<"conversations"> | null>(searchParams.get("id") as Id<"conversations">);
+	const [searchValue, setSearchValue] = useState("");
 	const pathName = usePathname();
 	const status = pathName.split("/")[2].replace(/(\w)(\w*)/g, function(_, firstChar, restOfString) {
 		return firstChar.toUpperCase() + restOfString.toLowerCase();
@@ -37,11 +38,11 @@ export default function Page() {
 		<Sidenav />
 		<div className="grid grid-rows-12 h-full w-60 min-w-60 border-r-[1px]">
 			<h1 className="flex row-span-1 items-center justify-center border-b-[1px]">{title}</h1>
-			<input className="row-span-1 outline-none border-b-[1px] h-full w-full px-2" placeholder="Search here..." type="text" />
+			<input className="row-span-1 outline-none border-b-[1px] h-full w-full px-2" placeholder="Search here..." type="text" onChange={(e) => setSearchValue(e.target.value)} />
 			<div className="row-span-10 overflow-auto no-scrollbar">
 				{
-					chats ? chats?.map((chat) => {
-						if(chat.status.toLowerCase() == status.toLowerCase()) return <Item
+					chats ? chats?.map((chat) => { //TODO : Add proper chat searching
+						if(chat.status.toLowerCase() == status.toLowerCase() && chat.createdBy.includes(searchValue)) return <Item
 							onClick={() => handleChatSelect(chat._id)}
 							id={chat._id}
 							status={chat.status}
