@@ -17,9 +17,10 @@ interface ChatWindowProps extends IConversation {
 export default function ChatWindow(props : ChatWindowProps) {
 
 	const [ message, setMessage ] = useState<string>("");
+	const inputRef = useRef<HTMLInputElement>(null);
 	const chatWindowRef = useRef<HTMLDivElement>(null);
-	
-	// const submitMessage = useMutation(api.conversations.put.message);
+
+	const submitMessage = useMutation(api.conversations.put.message);
 	const handleAddServiceMember = useMutation(api.conversations.put.newServiceMemeber);
 
 	useEffect(() => {
@@ -39,17 +40,18 @@ export default function ChatWindow(props : ChatWindowProps) {
 		})
 	}
 
-	// const handleSubmit = () => {
-	// 	console.log("called")
-	// 	submitMessage({ //Follow IChatMessage interface
-	// 		id: props.id,
-	// 		messages: [...props.messages, {
-	// 			message, 
-	// 			sender: props.user,
-	// 			timestamp: new Date().toISOString(),
-	// 		}]
-	// 	})
-	// }
+	const handleSubmit = (e : any) => {
+		e.preventDefault();
+		setMessage("")
+		submitMessage({ //Follow IChatMessage interface
+			id: props.id,
+			messages: [...props.messages, {
+				message, 
+				sender: props.user,
+				timestamp: new Date().toISOString(),
+			}]
+		})
+	}
 
 	let InputComponent; 
 	if (props.status == CONVERSATIONSTATUS.CLOSED) { //If the conversation is closed
@@ -58,7 +60,9 @@ export default function ChatWindow(props : ChatWindowProps) {
 		placeholder="Chat is closed"
 		disabled/>
 	} else if(props.user == props.createdBy || props.joinedServiceMembers.includes(props.user)) { //If the user joined the chat previously
-		InputComponent = <input value={message} onChange={(e) => setMessage(e.target.value)} />
+		InputComponent = <form className="w-full" onSubmit={handleSubmit}  onClick={() => inputRef.current?.focus()}>
+			<input ref={inputRef} className="w-full h-full focus:outline-none px-4" placeholder="Enter text here" value={message} onChange={(e) => setMessage(e.target.value)} />
+		</form>
 	} else {
 		InputComponent = <form onSubmit={handleJoinChat} className="w-full flex items-center justify-center">
 			<button className="btn btn-success text-white" type="submit"> Join Chat </button>
