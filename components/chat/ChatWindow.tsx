@@ -18,8 +18,13 @@ export default function ChatWindow(props : ChatWindowProps) {
 
 	const [ message, setMessage ] = useState<string>("");
 	const chatWindowRef = useRef<HTMLDivElement>(null);
-	const handleSubmit = useMutation(api.conversations.put.message);
+	
+	// const submitMessage = useMutation(api.conversations.put.message);
 	const handleAddServiceMember = useMutation(api.conversations.put.newServiceMemeber);
+
+	useEffect(() => {
+		console.log(message);
+	}, [message])
 
 	useEffect(() =>{
 		if(!chatWindowRef.current) return;
@@ -34,6 +39,18 @@ export default function ChatWindow(props : ChatWindowProps) {
 		})
 	}
 
+	// const handleSubmit = () => {
+	// 	console.log("called")
+	// 	submitMessage({ //Follow IChatMessage interface
+	// 		id: props.id,
+	// 		messages: [...props.messages, {
+	// 			message, 
+	// 			sender: props.user,
+	// 			timestamp: new Date().toISOString(),
+	// 		}]
+	// 	})
+	// }
+
 	let InputComponent; 
 	if (props.status == CONVERSATIONSTATUS.CLOSED) { //If the conversation is closed
 		InputComponent = <input
@@ -41,26 +58,7 @@ export default function ChatWindow(props : ChatWindowProps) {
 		placeholder="Chat is closed"
 		disabled/>
 	} else if(props.user == props.createdBy || props.joinedServiceMembers.includes(props.user)) { //If the user joined the chat previously
-		InputComponent = 	<form className="flex grow" onSubmit={(e) => {
-			e.preventDefault();
-			setMessage("");
-			handleSubmit({ //Follow IChatMessage interface
-				id: props.id,
-				messages: [...props.messages, {
-					message, 
-					sender: props.user,
-					timestamp: new Date().toISOString(),
-				}]
-			})		
-		}}>
-			<input
-			type="text"
-			value={message}
-			onChange={(e) => setMessage(e.target.value)}
-			className="w-full p-2 border-none focus:outline-none"
-			placeholder="Type a message"
-		/>
-		</form>
+		InputComponent = <input value={message} onChange={(e) => setMessage(e.target.value)} />
 	} else {
 		InputComponent = <form onSubmit={handleJoinChat} className="w-full flex items-center justify-center">
 			<button className="btn btn-success text-white" type="submit"> Join Chat </button>
@@ -68,7 +66,7 @@ export default function ChatWindow(props : ChatWindowProps) {
 	}
 
 	return (
-		<section className={`grid grid-rows-12 h-full overflow-y-scroll no-scrollbar bg-slate-100 ${props.className}`}>
+		<section className={`w-full grid grid-rows-12 h-full overflow-y-scroll no-scrollbar  ${props.className}`}>
 			<div className="row-span-11 overflow-y-scroll no-scrollbar px-4 py-2" ref={chatWindowRef}>
 				{props.messages?.map((chat) => (
 					<ChatBubble

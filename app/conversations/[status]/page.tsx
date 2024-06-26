@@ -18,7 +18,10 @@ export default function Page() {
 	const { replace } = useRouter();
 	const [ selectedChatId, setSelectedChatId ] = useState<Id<"conversations"> | null>(searchParams.get("id") as Id<"conversations">);
 	const pathName = usePathname();
-	const status = pathName.split("/")[2];
+	const status = pathName.split("/")[2].replace(/(\w)(\w*)/g, function(_, firstChar, restOfString) {
+		return firstChar.toUpperCase() + restOfString.toLowerCase();
+	});
+	
 	const title = status + " Chats";
 	const chats = useQuery(api.conversations.get.all, { limit: 1000 })
 	
@@ -34,7 +37,8 @@ export default function Page() {
 		<Sidenav />
 		<div className="grid grid-rows-12 h-full w-60 min-w-60 border-r-[1px]">
 			<h1 className="flex row-span-1 items-center justify-center border-b-[1px]">{title}</h1>
-			<div className="row-span-11 overflow-auto no-scrollbar">
+			<input className="row-span-1 outline-none border-b-[1px] h-full w-full px-2" placeholder="Search here..." type="text" />
+			<div className="row-span-10 overflow-auto no-scrollbar">
 				{
 					chats ? chats?.map((chat) => {
 						if(chat.status.toLowerCase() == status.toLowerCase()) return <Item
@@ -47,13 +51,16 @@ export default function Page() {
 								chat.messages[chat.messages.length - 1]?.message || "No Activity"
 							}
 							timeCreated={chat._creationTime.toString()}
+							isNew={chat.joinedServiceMembers.length === 0}
 						/>
 					}) : null
 				}
 			</div>
 		</div>
 		{
-			selectedChatId === "" || selectedChatId === null ? null : <ConversationSection id={selectedChatId as Id<"conversations">} />
+			selectedChatId === "" || selectedChatId === null ? <div className="flex grow items-center justify-center">
+				Select a chat to continue
+			</div> : <ConversationSection id={selectedChatId as Id<"conversations">} />
 		}
 		</>
 	)
@@ -66,18 +73,22 @@ function Item(props : {
 	timeCreated : string;
 	status : CONVERSATIONSTATUS;
 	children ?: string | React.ReactNode;
+	isNew ?: boolean;
 	onClick: () => void;
 }) {
 
 	const searchParams = useSearchParams();
 
 	return( //TODO : text-black not getting applied when searchParams id == props.id
-		<div onClick={props.onClick} className={`px-3 py-5 min-h-20 border-b-[1px] hover:cursor-pointer hover:bg-slate-100 transition-all text-gray-500 hover:text-black ${searchParams.get("id") == props.id ? "bg-slate-100 text-black " : ""} text-gray-500`}>
+		<div onClick={props.onClick} className={`relative px-3 py-5 min-h-20 border-b-[1px] hover:cursor-pointer hover:bg-slate-100 transition-all text-gray-500 hover:text-black ${searchParams.get("id") == props.id ? "bg-slate-100 text-black " : ""} text-gray-500`}>
 			<div className="flex items-center justify-between">
 				<span>{trunc(props.title, 13)}</span>
 				<span className="text-xs">{calculateTimePassed(props.timeCreated || "")}</span>
 			</div>
 			<p className="text-sm">{trunc(props.description, 20)}</p>
+			{
+				props.isNew ? <div className="absolute top-2 right-2 h-2 w-2 bg-accent rounded-full" /> : null
+			}
 		</div>
 	)
 }
