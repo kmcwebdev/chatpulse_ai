@@ -25,5 +25,8 @@ html, body, * {
 		margin: 0;
 		padding: 0; 
 	}
+}
 
+.ProseMirror:focus {
+	outline: none;
 }

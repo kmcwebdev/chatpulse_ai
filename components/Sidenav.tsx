@@ -23,6 +23,7 @@ export default function Sidenav() {
 				}
 				href="/conversations"
 			>
+			<SideNavItem title="New" href="/conversations/new"/>
 			<SideNavItem title="Open" href="/conversations/open"/>
 			<SideNavItem title="Closed" href="/conversations/closed"/>
 			</SideNavItem>
