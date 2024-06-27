@@ -146,7 +146,7 @@ export default function ChatWindow(props: ChatWindowProps) {
 								style={{ position: "fixed", top: "-100%" }}
 								onChange={(e) => {
 									if (e.target.files) {
-										handlePaste(null, [e.target.files[0]], null);
+										handlePaste(null, [e.target.files[0]]);
 									}
 								}}
 								accept="image/*, application/pdf"
