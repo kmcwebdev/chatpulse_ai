@@ -39,7 +39,7 @@ export default function ChatWindow(props: ChatWindowProps) {
 		}
 	}, messages)
 
-	const handlePaste = async (editor: any, files: any[], htmlContent: any) => {
+	const handlePaste = async (editor: any, files: any[]) => {
 		if (files.length < 1) return;
 		const fileType = files[0].type;
 		const allowedTypes = ["image/jpeg", "image/png", "image/gif", "application/pdf"];
