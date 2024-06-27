@@ -1,7 +1,7 @@
 'use client'
 import SideNavItem from "@/components/SidenavItem";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { ChatBubbleLeftRightIcon, ClipboardDocumentIcon, DocumentMagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleLeftRightIcon, ClipboardDocumentIcon, DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -66,8 +66,8 @@ export default function Sidenav() {
 			<SideNavItem
 				title={
 					<>
-						<DocumentMagnifyingGlassIcon className="size-5" />
-						<span className="text-xs font-semibold">Search</span>
+						<DocumentArrowDownIcon className="size-5" />
+						<span className="text-xs font-semibold">Export Data</span>
 					</>
 				}
 			/>

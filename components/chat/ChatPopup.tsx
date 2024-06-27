@@ -1,4 +1,5 @@
 "use client"
+
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
 
@@ -8,10 +9,6 @@ export default function ChatPopup(props : {
 }) {
 	const [isOpen, setIsOpen] = useState(props.isOpen ? props.isOpen : false);
 	const chatPopupRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		console.log(isOpen);
-	}, [isOpen])
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {

@@ -35,7 +35,7 @@ export default function LiveChat() {
 					<p className="text-xs text-center">Welcome back, it's good to see you again</p>
 				</div>
 				<Input title="Name" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required={true} />
-				<Input title="Email" type="email" placeholder="*******" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
+				<Input title="Email" type="email" placeholder="abc@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
 				<button className="btn btn-accent w-full" >
 					{ submitElement }
 				</button>

@@ -2,16 +2,17 @@
 
 import RoomInformationItem from "@/components/conversations/RoomInformationItem";
 import { api } from "@/convex/_generated/api";
-import { CONVERSATIONSTATUS, IRoomInformation, PRIORITY, QueryReturn } from "@/utils/types";
+import { IConversation, IRoomInformation } from "@/convex/schema";
+import { CONVERSATIONSTATUS, PRIORITY } from "@/utils/constants";
 import { trunc } from "@/utils/utils";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { useMutation, useQuery } from "convex/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
 import Tagger from "../Tagger";
 
-interface RoomInformationProps extends QueryReturn {
+interface RoomInformationProps extends IConversation {
 	isOpen: boolean;
 }
 
@@ -24,10 +25,6 @@ export default function RoomInformation(props: RoomInformationProps) {
 	const tags = useQuery(api.tags.get.all, { limit: 50 });
 	const closeChat = useMutation(api.conversations.put.closeChat);
 	const editRoomInformation = useMutation(api.conversations.put.roomInformation);
-
-	useEffect(() => {
-		console.log(roomInformation.priority);
-	}, [roomInformation.priority])
 
 	const handleSubmit = () => {
 		setIsEditModalOpen(false);
@@ -55,7 +52,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 		
 		return (
 			<RoomInformationItem title="Tags">
-				{props.roomInformation.tags.map((tag, index) => (
+				{props.roomInformation.tags.map((tag : string, index : number) => (
 					<span key={index} className="mr-1 badge badge-accent text-xs">
 						{tag}
 					</span>
@@ -65,7 +62,7 @@ export default function RoomInformation(props: RoomInformationProps) {
 	};
 
 	return (
-		<section
+		<section 
 			className={`overflow-y-scroll overflow-x-hidden bg-white border-l-[1px] h-full absolute top-0 right-0 transition-all no-scrollbar ${
 				props.isOpen ? "w-96" : "w-0"
 			}`}
