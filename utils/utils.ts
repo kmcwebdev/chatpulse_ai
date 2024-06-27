@@ -30,3 +30,9 @@ export function generateColor(): string {
 	const hexColor = number.toString(16);
 	return `#${hexColor}`;
 }
+
+export function removeHTMLTags(value: string) {
+	return value.replace(/<[^>]*>/g, ' ')
+	.replace(/\s{2,}/g, ' ')
+	.trim();
+}
