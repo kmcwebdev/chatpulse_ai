@@ -5,8 +5,8 @@ import ChatWindow from "@/components/chat/ChatWindow"
 import RoomInformation from "@/components/conversations/RoomInformation"
 import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
-import { CONVERSATIONSTATUS } from "@/utils/types"
-import { calculateTimePassed, trunc } from "@/utils/utils"
+import { CONVERSATIONSTATUS } from "@/utils/constants"
+import { calculateTimePassed, removeHTMLTags, trunc } from "@/utils/utils"
 import { useUser } from "@clerk/nextjs"
 import { InformationCircleIcon } from "@heroicons/react/24/outline"
 import { useQuery } from "convex/react"
@@ -49,9 +49,9 @@ export default function Page() {
 							key={chat._id}
 							title={chat.createdBy}
 							description={
-								chat.messages[chat.messages.length - 1]?.message || "No Activity"
+								removeHTMLTags(chat.messages[chat.messages.length - 1]?.format.includes("image") ? "Image" : chat.messages[chat.messages.length - 1]?.message || "No messages yet")
 							}
-							timeCreated={chat._creationTime.toString()}
+							timeCreated={(chat._creationTime as string).toString()}
 							isNew={chat.joinedServiceMembers.length === 0}
 						/>
 					}) : null
@@ -80,7 +80,7 @@ function Item(props : {
 
 	const searchParams = useSearchParams();
 
-	return( //TODO : text-black not getting applied when searchParams id == props.id
+	return( 
 		<div onClick={props.onClick} className={`relative px-3 py-5 min-h-20 border-b-[1px] hover:cursor-pointer hover:bg-slate-100 transition-all text-gray-500 hover:text-black ${searchParams.get("id") == props.id ? "bg-slate-100 text-black " : ""} text-gray-500`}>
 			<div className="flex items-center justify-between">
 				<span>{trunc(props.title, 13)}</span>
