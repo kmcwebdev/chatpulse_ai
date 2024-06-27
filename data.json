@@ -8,7 +8,8 @@
 			{
 				"sender": "User A",
 				"message": "How do I reset my password?",
-				"timestamp": "2023-06-01T08:00:00"
+				"timestamp": "2023-06-01T08:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -31,7 +32,8 @@
 			{
 				"sender": "User B",
 				"message": "System outage reported.",
-				"timestamp": "2023-06-01T09:00:00"
+				"timestamp": "2023-06-01T09:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -54,7 +56,8 @@
 			{
 				"sender": "User C",
 				"message": "Can I get access to the new software?",
-				"timestamp": "2023-06-01T10:00:00"
+				"timestamp": "2023-06-01T10:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -77,7 +80,8 @@
 			{
 				"sender": "User D",
 				"message": "Request for data backup.",
-				"timestamp": "2023-06-01T11:00:00"
+				"timestamp": "2023-06-01T11:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -100,7 +104,8 @@
 			{
 				"sender": "User E",
 				"message": "Network issue in office.",
-				"timestamp": "2023-06-01T12:00:00"
+				"timestamp": "2023-06-01T12:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -123,7 +128,8 @@
 			{
 				"sender": "User F",
 				"message": "How to set up VPN?",
-				"timestamp": "2023-06-01T13:00:00"
+				"timestamp": "2023-06-01T13:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -146,7 +152,8 @@
 			{
 				"sender": "User G",
 				"message": "Hardware failure reported.",
-				"timestamp": "2023-06-01T14:00:00"
+				"timestamp": "2023-06-01T14:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -169,7 +176,8 @@
 			{
 				"sender": "User H",
 				"message": "Request for software update.",
-				"timestamp": "2023-06-01T15:00:00"
+				"timestamp": "2023-06-01T15:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -192,7 +200,8 @@
 			{
 				"sender": "User I",
 				"message": "Email server down.",
-				"timestamp": "2023-06-01T16:00:00"
+				"timestamp": "2023-06-01T16:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
@@ -215,7 +224,8 @@
 			{
 				"sender": "User J",
 				"message": "Need help with printer setup.",
-				"timestamp": "2023-06-01T17:00:00"
+				"timestamp": "2023-06-01T17:00:00",
+				"format" : "text"
 			}
 		],
 		"roomInformation": {
