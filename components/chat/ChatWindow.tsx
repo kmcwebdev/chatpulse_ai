@@ -10,12 +10,12 @@ import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useMutation } from "convex/react";
+import { useAction, useMutation } from "convex/react";
 import { useEffect, useRef, useState } from "react";
 import ChatBubble from "./ChatBubble";
 
 interface ChatWindowProps extends IConversation {
-	id: Id<"conversations">;
+	id: Id<"chats">;
 	user: string;
 	className?: string;
 }
@@ -23,14 +23,17 @@ interface ChatWindowProps extends IConversation {
 export default function ChatWindow(props: ChatWindowProps) {
 	const generateUploadUrl = useMutation(api._storage.get.generateUploadUrl);
 	const generateImageUrl = useMutation(api._storage.get.generateImageUrl);
-	const submitMessage = useMutation(api.conversations.put.message);
-	const newServiceMember = useMutation(api.conversations.put.newServiceMemeber);
+	const submitMessage = useAction(api.chats.put.update);
+	const newServiceMember = useMutation(api.chats.put.newServiceMember);
 	const chatWindowRef = useRef<HTMLDivElement>(null);
 	const [message, setMessage] = useState("");
 	const [messages, setMessages] = useState<IChatMessage[]>(props.messages);
 
 	useEffect(() => {
 		setMessages(props.messages);
+		editor?.extensionManager.extensions.find((ext) => ext.name === "fileHandler")?.configure({
+			onPaste: handlePaste,
+		})
 	}, [props.messages]);
 
 	useEffect(() => {
@@ -56,7 +59,7 @@ export default function ChatWindow(props: ChatWindowProps) {
 
 		submitMessage({
 			id: props.id,
-			messages: {
+			message: {
 					message: files[0].name,
 					link: url,
 					sender: props.user,
@@ -91,12 +94,6 @@ export default function ChatWindow(props: ChatWindowProps) {
 		},
 	});
 
-	useEffect(() => {
-		editor?.extensionManager.extensions.find((ext) => ext.name === "fileHandler")?.configure({
-			onPaste: handlePaste,
-		})
-	}, [props.messages]);
-
 	const handleSubmit = () => {
 		if (editor?.isEmpty) return;
 		setMessage("");
@@ -113,7 +110,7 @@ export default function ChatWindow(props: ChatWindowProps) {
 
 		submitMessage({
 			id: props.id,
-			messages : {
+			message : {
 				message,
 				sender: props.user,
 				timestamp: new Date().toISOString(),
@@ -152,7 +149,7 @@ export default function ChatWindow(props: ChatWindowProps) {
 								accept="image/*, application/pdf"
 							/>
 						</label>
-						<EditorContent className="grow" editor={editor} />
+						<EditorContent className="w-full" editor={editor} />
 						<button className="flex h-full items-center justify-start" onClick={handleSubmit}>
 							<PaperAirplaneIcon className="size-6 text-accent" />
 						</button>

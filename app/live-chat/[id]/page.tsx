@@ -9,8 +9,8 @@ import { useParams } from "next/navigation";
 
 export default function LiveChatPage() {
 	const params = useParams<{ id : string}>();
-	const chat = useQuery(api.conversations.get.byId, {
-		id: params.id as Id<"conversations">
+	const chat = useQuery(api.chats.get.byId, {
+		id: params.id as Id<"chats">
 	})
 	
 	if(Array.isArray(chat)) return <div className="flex h-full w-full items-center justify-center">

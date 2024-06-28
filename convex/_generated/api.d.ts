@@ -14,8 +14,8 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
-import type * as conversations_get from "../conversations/get.js";
-import type * as conversations_put from "../conversations/put.js";
+import type * as chats_get from "../chats/get.js";
+import type * as chats_put from "../chats/put.js";
 import type * as tags_get from "../tags/get.js";
 import type * as _storage_get from "../_storage/get.js";
 
@@ -28,8 +28,8 @@ import type * as _storage_get from "../_storage/get.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  "conversations/get": typeof conversations_get;
-  "conversations/put": typeof conversations_put;
+  "chats/get": typeof chats_get;
+  "chats/put": typeof chats_put;
   "tags/get": typeof tags_get;
   "_storage/get": typeof _storage_get;
 }>;

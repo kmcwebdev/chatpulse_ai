@@ -1,7 +1,7 @@
 'use client'
 import Input from "@/components/Input";
 import { api } from "@/convex/_generated/api";
-import { useMutation } from "convex/react";
+import { useAction } from "convex/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -13,7 +13,7 @@ export default function LiveChat() {
 
 	const router = useRouter();
 
-	const createConversation = useMutation(api.conversations.put.newMessage);
+	const createConversation = useAction(api.chats.put.create);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
