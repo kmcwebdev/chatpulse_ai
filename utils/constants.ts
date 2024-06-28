@@ -1,7 +1,7 @@
 import { IRoomInformation } from "@/convex/schema";
 
 export enum CONVERSATIONSTATUS {
-	NEW = "New",
+	NEW = "New",	
 	OPEN = "Open",
 	CLOSED = "Closed",
 }

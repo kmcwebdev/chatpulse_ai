@@ -36,10 +36,11 @@ export const RoomInformationSchema = v.object({
 })
 
 const ChatTableSchema = v.object({
-	_id: v.id("conversations"),
+	_id: v.id("chats"),
 	_creationTime: v.string(),
 	createdBy: v.string(),
 	email: v.string(),
+	thread_id: v.string(),
 	joinedServiceMembers: v.array(v.string()),
 	messages: v.array(ChatMessageSchema),
 	roomInformation: RoomInformationSchema,
@@ -53,7 +54,7 @@ const ChatTableSchema = v.object({
 
 //TODO REFACTOR THIS TO USE CONVEX INFER
 export default defineSchema({
-  conversations: defineTable(ChatTableSchema),
+  chats: defineTable(ChatTableSchema),
 	tags: defineTable({
 		tags: v.array(v.string()),
 	}),

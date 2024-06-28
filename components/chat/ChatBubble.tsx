@@ -14,7 +14,20 @@ interface ChatBubbleProps extends IChatMessage {
 
 export default function ChatBubble(props: ChatBubbleProps) {
 	const renderContent = () => {
-		if(!props.link) return <ReactMarkdown rehypePlugins={[rehypeRaw]}>{props.message}</ReactMarkdown>
+		if(!props.link) return (
+			<ReactMarkdown
+				className="flex flex-col prose text-xs md:text-sm"
+				rehypePlugins={[rehypeRaw]}
+				components={{
+					li: ({ children }) => <li style={{ color: 'white' }}>{children}</li>,
+					p: ({ children }) => <p style={{ color: 'white' }}>{children}</p>,
+					ul: ({ children }) => <ul style={{ color: 'white' }}>{children}</ul>,
+					ol: ({ children }) => <ol style={{ color: 'white' }}>{children}</ol>,
+				}}
+			>
+				{props.message}
+			</ReactMarkdown>
+		)
 
 		else if(props.format?.includes("image")) {
 			return (
@@ -39,7 +52,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
 	return (
 		<div className={`chat text-xs ${props.isRight ? "chat-end" : "chat-start"}`} ref={props.ref}>
 			<div className="chat-header">{props.sender}</div>
-			<div className="flex items-center justify-center chat-bubble text-white prose">
+			<div className="flex items-center justify-center chat-bubble text-white">
 				{renderContent()}
 			</div>
 			<small className="chat-footer text-[10px] text-black font-light">
