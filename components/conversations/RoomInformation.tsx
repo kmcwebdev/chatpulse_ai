@@ -23,8 +23,8 @@ export default function RoomInformation(props: RoomInformationProps) {
 	const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
 
 	const tags = useQuery(api.tags.get.all, { limit: 50 });
-	const closeChat = useMutation(api.conversations.put.closeChat);
-	const editRoomInformation = useMutation(api.conversations.put.roomInformation);
+	const closeChat = useMutation(api.chats.put.closeChat);
+	const editRoomInformation = useMutation(api.chats.put.roomInformation);
 
 	const handleSubmit = () => {
 		setIsEditModalOpen(false);

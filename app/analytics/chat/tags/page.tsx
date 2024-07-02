@@ -8,7 +8,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 export default function AnalyticsTagsPage() {
 	let totalTags = 0;
 	const tags : {[key: string] : number} = {};
-	const chats = useQuery(api.conversations.get.all, { limit : 1000});
+	const chats = useQuery(api.chats.get.all, { limit : 1000});
 	
 	chats?.forEach((chat) => {
 		chat.roomInformation.tags.forEach((tag) => {
@@ -33,19 +33,6 @@ export default function AnalyticsTagsPage() {
 		<div className="grid grid-rows-12 h-full w-full">
 			<Card className="row-span-6" title="Tags">
 				<ResponsiveContainer width="100%" height="100%">
-					{/* <PieChart margin={{ top: 0, bottom: 0, left: 0, right: 0 }}>
-						<Pie
-							data={pieData}
-							dataKey="percentage"
-							nameKey="tag"
-							cx="50%"
-							cy="50%"
-							outerRadius="95%"
-							fill="#f0a154"
-						/>
-						<Tooltip />
-						<Legend align="left" />
-					</PieChart> */}
 					<BarChart margin={{ top: 0, bottom: 0, left: 0, right: 0 }} data={pieData}>
 						<CartesianGrid strokeDasharray="3 3" />
 						<XAxis dataKey="name" />
