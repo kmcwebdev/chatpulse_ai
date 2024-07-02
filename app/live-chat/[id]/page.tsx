@@ -14,7 +14,7 @@ export default function LiveChatPage() {
 	})
 	
 	if(Array.isArray(chat)) return <div className="flex h-full w-full items-center justify-center">
-		<span>Select a conversation to view</span>
+		<span>Select a chat to view</span>
 	</div>
 
 	return (

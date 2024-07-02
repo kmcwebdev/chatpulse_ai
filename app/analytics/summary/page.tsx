@@ -17,7 +17,7 @@ import {
 } from 'recharts';
 
 export default function AnalyticsSummaryPage() {
-	const chats = useQuery(api.conversations.get.all, { limit: 1000 });
+	const chats = useQuery(api.chats.get.all, { limit: 1000 });
 
 	const getTagsAndChatDays = () => {
 		let totalTags = 0;

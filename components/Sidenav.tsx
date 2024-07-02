@@ -21,11 +21,11 @@ export default function Sidenav() {
 						<span>Conversations</span>
 					</>
 				}
-				href="/conversations"
+				href="/chats"
 			>
-			<SideNavItem title="New" href="/conversations/new"/>
-			<SideNavItem title="Open" href="/conversations/open"/>
-			<SideNavItem title="Closed" href="/conversations/closed"/>
+			<SideNavItem title="New" href="/chats/new"/>
+			<SideNavItem title="Open" href="/chats/open"/>
+			<SideNavItem title="Closed" href="/chats/closed"/>
 			</SideNavItem>
 			<SideNavItem title={<span className="text-xs font-semibold">ANALYTICS</span>} hoverable={false}/>
 			<SideNavItem
